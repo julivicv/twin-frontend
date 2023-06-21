@@ -1,13 +1,22 @@
 <template>
-  <div></div>
+  <div>
+    <ProductCard />
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
+import ProductCard from '../components/ProductCard.vue';
 
 export default defineComponent({
   name: 'HomePage',
-  components: {},
-  setup() {},
+  components: {
+    ProductCard,
+  },
+  setup() {
+    return {
+      ProductCard
+    };
+  },
 });
 </script>
