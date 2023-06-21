@@ -1,5 +1,4 @@
 <template>
-<<<<<<< Updated upstream
   <div id="q-app" style="min-height: 100vh;">
     <div class="q-pa-md">
       <q-layout view="hHh Lpr lff">
@@ -23,16 +22,6 @@
 
             <router-link v-if="!isAuthenticated" to="/login" class="hover:tw-underline" >Login</router-link>
             <router-link v-if="!isAuthenticated" to="/cadastro" class="hover:tw-underline" >Cadastro</router-link>
-=======
-  <q-layout view="lHh Lpr lFf">
-    <HeaderTwin title="Twin" />
-
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item-label header> Essential Links </q-item-label>
-      </q-list>
-    </q-drawer>
->>>>>>> Stashed changes
 
             <span v-if="isAuthenticated">Olá {{ user.name }}</span>
             <q-avatar v-if="isAuthenticated" class="q-mr-sm ">
@@ -84,7 +73,7 @@
             </q-avatar>
             <q-icon v-else name="account_circle" size="60px"/>
             <div v-if="isAuthenticated" class="text-weight-bold">{{user.name}}</div>
-            
+
             <div v-else class="text-weight-bold">Olá, logue-se</div>
           </div>
         </q-img>
@@ -99,9 +88,7 @@
 </template>
 
 <script lang="ts">
-<<<<<<< Updated upstream
 import { defineComponent, ref } from 'vue';
-import EssentialLink from 'components/EssentialLink.vue';
 
 const linksList = [
   {
@@ -140,16 +127,11 @@ const linksList = [
     link: '#'
   }
 ];
-=======
-import { defineComponent } from 'vue';
-import HeaderTwin from 'src/components/HeaderTwin.vue';
->>>>>>> Stashed changes
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
-<<<<<<< Updated upstream
     EssentialLink,
   },
 
@@ -186,10 +168,6 @@ export default defineComponent({
       },
     }
   }
-=======
-    HeaderTwin,
-  },
->>>>>>> Stashed changes
 });
 </script>
 

@@ -8,7 +8,6 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
-<<<<<<< Updated upstream
     path: '/Login',
     component: () => import('layouts/MainLayout.vue'),
     children: [
@@ -24,16 +23,11 @@ const routes: RouteRecordRaw[] = [
     ],
   },
 
-  {
-    path: '/Menu',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('src/pages/MenuPage.vue') }],
-=======
-    path: '/home',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
->>>>>>> Stashed changes
-  },
+  // {
+  //   path: '/Menu',
+  //   component: () => import('layouts/MainLayout.vue'),
+  //   children: [{ path: '', component: () => import('src/pages/MenuPage.vue') }],
+  // },
 
   // Always leave this as last one,
   // but you can also remove it
