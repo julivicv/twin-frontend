@@ -31,7 +31,7 @@
           (val) =>
             (val !== null && val !== '') ||
             'Por favor, digite um email para contato.',
-          (val) => (val > 0 && val < 100) || 'Email inválido',
+          (val) => (val > 0 && val < 10000) || 'Email inválido',
         ]"
         type="email"
       />
