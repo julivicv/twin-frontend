@@ -43,7 +43,7 @@
         <q-toggle v-model="accept" label="Aceito a licença e os termos." />
 
         <div>
-          <q-btn label="Submit" type="submit" color="primary" />
+          <q-btn label="Continuar" type="submit" class="buttonConfirm" />
           <q-btn
             label="Reset"
             type="reset"
