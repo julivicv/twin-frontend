@@ -1,6 +1,8 @@
 <template>
   <div>
-    <ProductCard />
+    <div class="q-pa-md row items-start q-gutter-md">
+      <ProductCard />
+    </div>
   </div>
 </template>
 
@@ -15,7 +17,7 @@ export default defineComponent({
   },
   setup() {
     return {
-      ProductCard
+      ProductCard,
     };
   },
 });

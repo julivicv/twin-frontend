@@ -8,7 +8,7 @@
         margin-bottom: 20px;
       "
     >
-      Cadastre-se e conheça o Twin ;)
+      Cadastre-se e conheça o Twin ;
     </h1>
 
     <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
