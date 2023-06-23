@@ -80,6 +80,8 @@
 <script lang="ts">
 import { ref } from 'vue';
 import { useQuasar } from 'quasar';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
 import anime from 'animejs';
 
 export default {
@@ -195,6 +197,7 @@ export default {
   right: 10%;
 }
 .q-page {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 </style>
