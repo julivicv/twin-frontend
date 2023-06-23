@@ -1,16 +1,5 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <h1
-      style="
-        color: #26a69a;
-        font-size: 50px;
-        font-weight: bold;
-        margin-bottom: 20px;
-      "
-    >
-      Cadastre-se e conheça o Twin ;
-    </h1>
-
+  <q-page class="row items-center justify-evenly formCad">
     <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
       <q-input
         filled
@@ -68,12 +57,16 @@
         type="password"
       />
 
-      <q-btn label="Termos e condições" color="secondary" />
+      <q-btn label="Termos e condições" />
 
-      <q-toggle v-model="accept" label="Aceito a licença e os termos." />
+      <q-toggle
+        v-model="accept"
+        label="Aceito a licença e os termos."
+        color="positive"
+      />
 
       <div>
-        <q-btn label="Continuar" type="submit" color="primary" />
+        <q-btn label="Continuar" type="submit" class="buttonConfirm" />
       </div>
     </q-form>
   </q-page>
@@ -129,3 +122,13 @@ export default {
   },
 };
 </script>
+<style>
+.formCad {
+  background-image: linear-gradient(to top left, #202c59, #d95d39);
+  height: calc(100vh - 50px);
+}
+
+.buttonConfirm {
+  color-text: white;
+}
+</style>
