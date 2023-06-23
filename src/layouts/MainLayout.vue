@@ -215,10 +215,10 @@ export default defineComponent({
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
       login() {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
         isAuthenticated.value
-          ? this.$router.push('/login')
+          ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore
+            this.$router.push('/login')
           : (isAuthenticated.value = true);
       },
     };

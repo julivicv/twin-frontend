@@ -80,23 +80,52 @@
 <script lang="ts">
 import { ref } from 'vue';
 import { useQuasar } from 'quasar';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
 import anime from 'animejs';
 
 export default {
   methods: {
     animateBubbles() {
-      anime({
-        targets: this.$refs.top,
-        translateY: 250,
+      var tl = anime.timeline({
+        easing: 'easeInOutQuad',
+        duration: 1100,
       });
-      anime({
-        targets: this.$refs.right,
-        translateX: -250,
-      });
-      anime({
-        targets: this.$refs.bottom,
-        translateY: -250,
-      });
+      tl.add({ targets: this.$refs.top, translateY: 110, translateX: 15 })
+        .add(
+          {
+            targets: this.$refs.right,
+            translateX: -110,
+            translateY: -70,
+            easing: 'easeInOutQuad',
+            duration: 1100,
+          },
+          '-=990'
+        )
+        .add(
+          {
+            targets: this.$refs.bottom,
+            translateY: -110,
+            translateX: 15,
+            easing: 'easeInOutQuad',
+            duration: 1100,
+          },
+          '-=990'
+        )
+        .finished.then(() =>
+          anime({
+            targets: '.bubbles',
+            scale: function () {
+              return ['100%', anime.random(101, 105) + '%'];
+            },
+            duration: function () {
+              return anime.random(1500, 1800);
+            },
+            direction: 'alternate',
+            loop: true,
+            easing: 'easeInOutSine',
+          })
+        );
     },
   },
   mounted: function mounted() {
@@ -156,15 +185,19 @@ export default {
   position: absolute;
 }
 .btop {
-  top: -280px;
+  top: -110px;
   right: 15%;
 }
 .bright {
-  right: -280px;
-  top: 0;
+  right: -110px;
+  top: -70px;
 }
 .bbottom {
-  bottom: -280px;
+  bottom: -110px;
   right: 10%;
+}
+.q-page {
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 </style>
