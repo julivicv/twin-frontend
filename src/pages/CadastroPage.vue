@@ -1,82 +1,233 @@
 <template>
-  <q-page class="row items-center justify-evenly formCad">
-    <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-      <q-input
-        filled
-        v-model="nomeUsuario"
-        label="Nome"
-        lazy-rules
-        :rules="[
-          (val) => (val && val.length > 0) || 'Por favor, digite seu nome.',
-        ]"
+  <q-page class="row items-center justify-evenly tw-overflow-hidden">
+    <div class="img-container tw-w-[50%] tw-min-h-[100vh]">
+      <div class="title-container"><h1 class="register-title">TWIN</h1></div>
+      <div
+        class="tw-bg-white tw-w-[50%] tw-h-[193px] absolute tw-bottom-[-100px]"
+        ref="bgBubbles"
+      ></div>
+      <img
+        class="absolute tw-bottom-[-150px] tw-w-[50%] bubbles"
+        ref="bubbles1"
+        src="../assets/bubbles_bg1.svg"
+        alt=""
       />
-
-      <q-input
-        filled
-        v-model="email"
-        label="Email"
-        lazy-rules
-        :rules="[
-          (val) =>
-            (val !== null && val !== '') ||
-            'Por favor, digite um email para contato.',
-          (val) => (val > 0 && val < 10000) || 'Email inválido',
-        ]"
-        type="email"
+      <img
+        class="absolute tw-bottom-[-150px] tw-w-[50%] bubbles"
+        ref="bubbles2"
+        src="../assets/bubbles_bg2.svg"
+        alt=""
       />
+      <div
+        class="bubble1 bubble tw-rounded-full tw-bg-white tw-absolute tw-bottom-[40px] tw-left-[35vw] tw-h-[69px] tw-w-[69px]"
+      ></div>
+      <div
+        class="bubble2 bubble tw-rounded-full tw-bg-white tw-absolute tw-bottom-[140px] tw-left-[40vw] tw-h-[51px] tw-w-[51px]"
+      ></div>
+      <div
+        class="bubble3 bubble tw-rounded-full tw-bg-white tw-absolute tw-bottom-[140px] tw-left-[3vw] tw-h-[30px] tw-w-[30px]"
+      ></div>
+      <div
+        class="bubble4 bubble tw-rounded-full tw-bg-white tw-absolute tw-bottom-[140px] tw-left-[9vw] tw-h-[51px] tw-w-[51px]"
+      ></div>
 
-      <q-input
-        filled
-        v-model="senha"
-        label="Senha"
-        lazy-rules
-        :rules="[
-          (val) =>
-            (val !== null && val !== '') ||
-            'Por favor, digite uma senha de acesso.',
-          (val) => (val > 0 && val < 1000) || 'Senha inválida ou insuficiente.',
-        ]"
-        type="password"
-      />
+      <img ref="twinny" class="twinny" src="../assets/twinny.png" alt="" />
+    </div>
+    <div
+      class="tw-flex tw-items-center tw-w-[50%] tw-justify-center form-container tw-z-0 register-form-container self-start"
+    >
+      <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+        <q-input
+          standout
+          rounded
+          v-model="nomeUsuario"
+          label="Nome"
+          lazy-rules
+          :rules="[
+            (val) => (val && val.length > 0) || 'Por favor, digite seu nome.',
+          ]"
+        />
 
-      <q-input
-        filled
-        v-model="confirmSenha"
-        label="Confirme a senha"
-        lazy-rules
-        :rules="[
-          (val) => (val !== null && val !== '') || 'Por favor, digite a senha.',
-          (val) => {
-            if (val === senha) {
-              return true;
-            } else {
-              return 'As senhas não correspondem.';
-            }
-          },
-        ]"
-        type="password"
-      />
+        <q-input
+          standout
+          rounded
+          v-model="email"
+          label="Email"
+          lazy-rules
+          :rules="[
+            (val) =>
+              (val !== null && val !== '') ||
+              'Por favor, digite um email para contato.',
+            (val) => (val > 0 && val < 10000) || 'Email inválido',
+          ]"
+          type="email"
+        />
 
-      <q-btn label="Termos e condições" />
+        <q-input
+          standout
+          rounded
+          v-model="senha"
+          label="Senha"
+          lazy-rules
+          :rules="[
+            (val) =>
+              (val !== null && val !== '') ||
+              'Por favor, digite uma senha de acesso.',
+            (val) =>
+              (val > 0 && val < 1000) || 'Senha inválida ou insuficiente.',
+          ]"
+          type="password"
+        />
 
-      <q-toggle
-        v-model="accept"
-        label="Aceito a licença e os termos."
-        color="positive"
-      />
+        <q-input
+          standout
+          rounded
+          v-model="confirmSenha"
+          label="Confirme a senha"
+          lazy-rules
+          :rules="[
+            (val) =>
+              (val !== null && val !== '') || 'Por favor, digite a senha.',
+            (val) => {
+              if (val === senha) {
+                return true;
+              } else {
+                return 'As senhas não correspondem.';
+              }
+            },
+          ]"
+          type="password"
+        />
 
-      <div>
-        <q-btn label="Continuar" type="submit" class="buttonConfirm" />
-      </div>
-    </q-form>
+        <q-btn label="Termos e condições" color="secondary" />
+
+        <q-toggle
+          v-model="accept"
+          label="Aceito a licença e os termos."
+          color="primary"
+        />
+
+        <div>
+          <q-btn
+            label="Continuar"
+            type="submit"
+            class="submit-button"
+            color="primary"
+          />
+        </div>
+      </q-form>
+    </div>
   </q-page>
 </template>
 
 <script lang="ts">
 import { ref } from 'vue';
 import { useQuasar } from 'quasar';
+//eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
+import anime from 'animejs';
 
 export default {
+  methods: {
+    moveTwinny() {
+      anime({
+        targets: this.twinny,
+        duration: 900,
+        direction: 'alternate',
+        easing: 'easeInOutSine',
+        translateX: function () {
+          return [anime.random(-30, 30) + 'px'];
+        },
+        translateY: function () {
+          return [anime.random(-30, 30) + 'px'];
+        },
+        complete: this.moveTwinny,
+      });
+    },
+    animateOnPageLoad() {
+      var tl = anime.timeline({
+        easing: 'easeInOutSine',
+        duration: 1100,
+      });
+      tl.add({ targets: this.bubbles1, translateY: -50 })
+        .add(
+          {
+            targets: this.bubbles2,
+            translateY: -50,
+          },
+          100
+        )
+        .add(
+          {
+            targets: this.bgBubbles,
+            translateY: -50,
+          },
+          100
+        )
+        .finished.then(() =>
+          anime({
+            targets: '.bubbles',
+            scale: function () {
+              return ['100%', anime.random(101, 103) + '%'];
+            },
+            duration: function () {
+              return anime.random(1600, 1900);
+            },
+            direction: 'alternate',
+            loop: true,
+            easing: 'linear',
+          })
+        );
+      var risingBubbles = anime.timeline({
+        targets: '.bubble',
+        duration: 1900,
+        loop: true,
+        easing: 'easeInOutQuad',
+      });
+      risingBubbles
+        .add(
+          {
+            targets: '.bubble1',
+            translateY: -800,
+            opacity: 0,
+          },
+          '-=300'
+        )
+        .add(
+          {
+            targets: '.bubble2',
+            translateY: -700,
+            opacity: 0,
+          },
+          '-=300'
+        )
+        .add(
+          {
+            targets: '.bubble4',
+            translateY: -700,
+            opacity: 0,
+          },
+          '-=300'
+        )
+        .add(
+          {
+            targets: '.bubble3',
+            translateY: -700,
+            opacity: 0,
+          },
+          '-=600'
+        );
+      anime({
+        targets: this.twinny,
+        easing: 'easeInOutQuad',
+        duration: 900,
+        opacity: 1,
+      }).finished.then(() => this.moveTwinny());
+    },
+  },
+  mounted: function mounted() {
+    this.animateOnPageLoad();
+  },
   setup() {
     const $q = useQuasar();
 
@@ -85,6 +236,11 @@ export default {
     const confirmSenha = ref(null);
     const email = ref(null);
     const accept = ref(false);
+    const bgBubbles = ref(false);
+    const bubbles1 = ref(false);
+    const bubbles2 = ref(false);
+    const twinny = ref(false);
+    $q.dark.set(true);
 
     return {
       nomeUsuario,
@@ -92,6 +248,10 @@ export default {
       email,
       senha,
       accept,
+      bgBubbles,
+      bubbles1,
+      bubbles2,
+      twinny,
 
       onSubmit() {
         if (accept.value !== true) {
@@ -122,13 +282,26 @@ export default {
   },
 };
 </script>
-<style>
-.formCad {
-  background-image: linear-gradient(to top left, #202c59, #d95d39);
-  height: calc(100vh - 50px);
+<style lang="scss">
+.register-form-container {
+  background-image: linear-gradient(28deg, black 60%, $primary);
+  height: 100vh;
 }
-
-.buttonConfirm {
-  color-text: white;
+.img-container {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.twinny {
+  opacity: 0;
+  z-index: 0;
+  position: absolute;
+  bottom: calc(35vh - 250px);
+  left: calc(30vw - 300px);
+}
+.register-title {
+  font-family: 'Kodchasan', sans-serif;
+  font-size: 128pt;
 }
 </style>

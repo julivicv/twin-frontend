@@ -3,7 +3,7 @@
     <q-page class="column items-center justify-evenly">
       <img class="absolute-top-left" src="../assets/twinny_left.svg" alt="" />
       <div
-        class="tw-flex tw-items-center tw-w-[60%] tw-justify-center form-container self-start"
+        class="tw-flex tw-items-center tw-w-[60%] tw-justify-center form-container login-form-container self-start"
       >
         <q-form @submit="onSubmit" class="q-gutter-md login-form tw-w-[40%]">
           <q-input
@@ -94,10 +94,10 @@ export default {
         easing: 'easeInOutQuad',
         duration: 1100,
       });
-      tl.add({ targets: this.$refs.top, translateY: 110, translateX: 15 })
+      tl.add({ targets: this.top, translateY: 110, translateX: 15 })
         .add(
           {
-            targets: this.$refs.right,
+            targets: this.right,
             translateX: -110,
             translateY: -70,
             easing: 'easeInOutQuad',
@@ -107,7 +107,7 @@ export default {
         )
         .add(
           {
-            targets: this.$refs.bottom,
+            targets: this.bottom,
             translateY: -110,
             translateX: 15,
             easing: 'easeInOutQuad',
@@ -176,7 +176,7 @@ export default {
 </script>
 
 <style lang="scss">
-.form-container {
+.login-form-container {
   background-image: linear-gradient(to top right, $secondary, $primary);
   height: 100vh;
 }
