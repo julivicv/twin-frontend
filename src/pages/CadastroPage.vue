@@ -52,7 +52,11 @@
           :rules="[
             (val) => (val && val.length > 0) || 'Por favor, digite seu nome.',
           ]"
-        />
+        >
+          <template v-slot:prepend>
+            <q-icon name="person" />
+          </template>
+        </q-input>
 
         <q-input
           standout
@@ -67,7 +71,11 @@
             (val) => (val > 0 && val < 10000) || 'Email inválido',
           ]"
           type="email"
-        />
+        >
+          <template v-slot:prepend>
+            <q-icon name="mail" />
+          </template>
+        </q-input>
 
         <q-input
           standout
@@ -80,30 +88,19 @@
               (val !== null && val !== '') ||
               'Por favor, digite uma senha de acesso.',
             (val) =>
-              (val > 0 && val < 1000) || 'Senha inválida ou insuficiente.',
+              (val.length() > 0 && val.length() < 1000) ||
+              'Senha inválida ou insuficiente.',
           ]"
-          type="password"
-        />
-
-        <q-input
-          standout
-          rounded
-          v-model="confirmSenha"
-          label="Confirme a senha"
-          lazy-rules
-          :rules="[
-            (val) =>
-              (val !== null && val !== '') || 'Por favor, digite a senha.',
-            (val) => {
-              if (val === senha) {
-                return true;
-              } else {
-                return 'As senhas não correspondem.';
-              }
-            },
-          ]"
-          type="password"
-        />
+          :type="passwordType"
+        >
+          <template v-slot:prepend>
+            <q-icon
+              class="cursor-pointer"
+              @click="togglePassword"
+              name="lock"
+            />
+          </template>
+        </q-input>
 
         <q-btn label="Termos e condições" color="secondary" />
 
@@ -246,7 +243,11 @@ export default {
     const bubbles1 = ref(false);
     const bubbles2 = ref(false);
     const twinny = ref(false);
+    var passwordType = ref('password');
     $q.dark.set(true);
+
+    const togglePassword = () =>
+      passwordType.value == 'password' ? 'text' : 'password';
 
     return {
       nomeUsuario,
@@ -258,6 +259,8 @@ export default {
       bubbles1,
       bubbles2,
       twinny,
+      passwordType,
+      togglePassword,
 
       onSubmit() {
         if (accept.value !== true) {
