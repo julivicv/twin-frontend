@@ -1,7 +1,13 @@
 <template>
   <q-page class="row items-center justify-evenly tw-overflow-hidden">
     <div class="img-container tw-w-[50%] tw-min-h-[100vh]">
-      <div class="title-container"><h1 class="register-title">TWIN</h1></div>
+      <div class="title-container tw-flex tw-flex-col tw-items-center">
+        <h1 class="register-title">TWIN</h1>
+        <span class="register-subtitle"
+          >Transforme seu sonho em realidade:
+          <strong> crie seu e-commerce em segundos!</strong></span
+        >
+      </div>
       <div
         class="tw-bg-white tw-w-[50%] tw-h-[193px] absolute tw-bottom-[-100px]"
         ref="bgBubbles"
@@ -303,5 +309,17 @@ export default {
 .register-title {
   font-family: 'Kodchasan', sans-serif;
   font-size: 128pt;
+  justify-self: center;
+  margin-top: 45px;
+  margin-bottom: 25px;
+}
+.register-subtitle {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 35pt;
+  max-width: max(75%, 300px);
+  text-align: justify;
+}
+strong {
+  font-weight: bold;
 }
 </style>
