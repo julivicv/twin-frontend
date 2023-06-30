@@ -40,8 +40,9 @@
       <img ref="twinny" class="twinny" src="../assets/twinny.png" alt="" />
     </div>
     <div
-      class="tw-flex tw-items-center tw-w-[50%] tw-justify-center form-container tw-z-0 register-form-container self-start"
+      class="tw-flex tw-flex-col tw-items-center tw-w-[50%] tw-justify-center form-container tw-z-0 register-form-container self-start"
     >
+      <span class="register-form-title">CADASTRE-SE</span>
       <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
         <q-input
           standout
@@ -50,7 +51,7 @@
           label="Nome"
           lazy-rules
           :rules="[
-            (val) => (val && val.length > 0) || 'Por favor, digite seu nome.',
+            (val) => (val && val.length() > 0) || 'Por favor, digite seu nome.',
           ]"
         >
           <template v-slot:prepend>
@@ -68,7 +69,10 @@
             (val) =>
               (val !== null && val !== '') ||
               'Por favor, digite um email para contato.',
-            (val) => (val > 0 && val < 10000) || 'Email inválido',
+            (val) =>
+              /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi.test(
+                val
+              ) || 'Email inválido',
           ]"
           type="email"
         >
@@ -88,26 +92,34 @@
               (val !== null && val !== '') ||
               'Por favor, digite uma senha de acesso.',
             (val) =>
-              (val.length() > 0 && val.length() < 1000) ||
+              (val.length() > 0 && val.length() < 200) ||
               'Senha inválida ou insuficiente.',
           ]"
           :type="passwordType"
         >
           <template v-slot:prepend>
             <q-icon
+              v-if="passwordType === 'password'"
               class="cursor-pointer"
               @click="togglePassword"
               name="lock"
+            />
+            <q-icon
+              v-if="passwordType === 'text'"
+              class="cursor-pointer"
+              @click="togglePassword"
+              name="lock_open"
             />
           </template>
         </q-input>
 
         <q-btn label="Termos e condições" color="secondary" />
 
-        <q-toggle
-          v-model="accept"
-          label="Aceito a licença e os termos."
+        <q-checkbox
+          v-model="check"
+          label="Concordo que li e aceito os termos e condições"
           color="primary"
+          keep-color
         />
 
         <div>
@@ -246,8 +258,11 @@ export default {
     var passwordType = ref('password');
     $q.dark.set(true);
 
-    const togglePassword = () =>
-      passwordType.value == 'password' ? 'text' : 'password';
+    const togglePassword = () => (
+      (passwordType.value =
+        passwordType.value == 'password' ? 'text' : 'password'),
+      console.log(passwordType.value)
+    );
 
     return {
       nomeUsuario,
@@ -261,6 +276,7 @@ export default {
       twinny,
       passwordType,
       togglePassword,
+      check: ref(true),
 
       onSubmit() {
         if (accept.value !== true) {
@@ -321,6 +337,11 @@ export default {
   font-size: 35pt;
   max-width: max(75%, 300px);
   text-align: justify;
+}
+.register-form-title {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 40pt;
+  margin-bottom: 20px;
 }
 strong {
   font-weight: bold;

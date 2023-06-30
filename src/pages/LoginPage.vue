@@ -36,16 +36,28 @@
               (val) =>
                 (val > 0 && val < 100) || 'Senha inválida ou insuficiente.',
             ]"
+            :type="passwordType"
           >
             <template v-slot:prepend>
-              <q-icon name="lock" />
+              <q-icon
+                v-if="passwordType === 'password'"
+                class="cursor-pointer"
+                @click="togglePassword"
+                name="lock"
+              />
+              <q-icon
+                v-if="passwordType === 'text'"
+                class="cursor-pointer"
+                @click="togglePassword"
+                name="lock_open"
+              />
             </template>
           </q-input>
 
           <div class="flex">
             <q-btn
               class="tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
-              label="Logar-se"
+              label="Logar"
               type="submit"
               color="primary"
             />
@@ -143,7 +155,12 @@ export default {
     const top = ref(false);
     const right = ref(false);
     const bottom = ref(false);
+    var passwordType = ref('password');
     $q.dark.set(true);
+
+    const togglePassword = () =>
+      (passwordType.value =
+        passwordType.value == 'password' ? 'text' : 'password');
 
     return {
       login,
@@ -152,6 +169,8 @@ export default {
       top,
       right,
       bottom,
+      togglePassword,
+      passwordType,
 
       onSubmit() {
         if (accept.value !== true) {
