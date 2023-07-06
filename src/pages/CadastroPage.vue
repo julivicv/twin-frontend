@@ -51,7 +51,7 @@
           label="Nome"
           lazy-rules
           :rules="[
-            (val) => (val && val.length() > 0) || 'Por favor, digite seu nome.',
+            (val) => (val && val.length > 0) || 'Por favor, digite seu nome.',
           ]"
         >
           <template v-slot:prepend>
@@ -92,7 +92,7 @@
               (val !== null && val !== '') ||
               'Por favor, digite uma senha de acesso.',
             (val) =>
-              (val.length() > 0 && val.length() < 200) ||
+              (val.toString().length > 6 && val.toString().length < 120) ||
               'Senha inválida ou insuficiente.',
           ]"
           :type="passwordType"
@@ -113,20 +113,26 @@
           </template>
         </q-input>
 
-        <q-btn label="Termos e condições" color="secondary" />
+        <div>
+          <q-btn
+            label="Termos e condições"
+            class="tw-rounded-[1.5rem] tw-mx-auto"
+            color="secondary"
+          />
 
-        <q-checkbox
-          v-model="check"
-          label="Concordo que li e aceito os termos e condições"
-          color="primary"
-          keep-color
-        />
+          <q-checkbox
+            v-model="accept"
+            label="Concordo que li e aceito os termos e condições"
+            color="primary"
+            keep-color
+          />
+        </div>
 
         <div>
           <q-btn
             label="Continuar"
             type="submit"
-            class="submit-button"
+            class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
             color="primary"
           />
         </div>
@@ -276,15 +282,16 @@ export default {
       twinny,
       passwordType,
       togglePassword,
-      check: ref(true),
 
       onSubmit() {
-        if (accept.value !== true) {
+        console.log('aaa');
+        if (accept.value === false) {
           $q.notify({
             color: 'red-5',
             textColor: 'white',
             icon: 'warning',
             message: 'Você precisa aceitar os termos antes de continuar.',
+            position: 'top-right',
           });
         } else {
           $q.notify({
@@ -292,6 +299,7 @@ export default {
             textColor: 'white',
             icon: 'cloud_done',
             message: 'Submitted',
+            position: 'top-right',
           });
         }
       },

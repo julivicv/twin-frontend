@@ -98,6 +98,7 @@ import { useQuasar } from 'quasar';
 //eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 import anime from 'animejs';
+import axios from 'axios';
 
 export default {
   methods: {
@@ -151,7 +152,6 @@ export default {
 
     const login = ref(null);
     const senha = ref(null);
-    const accept = ref(false);
     const top = ref(false);
     const right = ref(false);
     const bottom = ref(false);
@@ -165,7 +165,6 @@ export default {
     return {
       login,
       senha,
-      accept,
       top,
       right,
       bottom,
@@ -173,21 +172,12 @@ export default {
       passwordType,
 
       onSubmit() {
-        if (accept.value !== true) {
-          $q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'warning',
-            message: 'Você precisa aceitar os termos antes de continuar.',
-          });
-        } else {
-          $q.notify({
-            color: 'green-4',
-            textColor: 'white',
-            icon: 'cloud_done',
-            message: 'Submitted',
-          });
-        }
+        $q.notify({
+          color: 'green-4',
+          textColor: 'white',
+          icon: 'cloud_done',
+          message: 'Submitted',
+        });
       },
     };
   },
