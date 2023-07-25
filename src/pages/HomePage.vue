@@ -1,22 +1,17 @@
 <template>
-  <HeaderTwin />
-  <div>
-    <div class="q-pa-md row items-start q-gutter-md">
-      <ProductsCards :productsData="productsData" />
-    </div>
+  <div class="q-pa-md q-pt-lg row items-start q-gutter-md">
+    <ProductsCards :productsData="productsData" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import ProductsCards from '../components/ProductsCards.vue';
-import HeaderTwin from 'src/components/HeaderTwin.vue';
 
 export default defineComponent({
   name: 'HomePage',
   components: {
     ProductsCards,
-    HeaderTwin
   },
   setup() {
     return {
@@ -54,7 +49,7 @@ export default defineComponent({
         },
         {
           id: 6,
-          name: 'Produto 1',
+          name: 'Produto 1, mas dessa vez com um título incompreensivelmente colossal',
           price: 'R$ 120,00',
           isFreeShipping: true
         },

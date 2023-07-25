@@ -1,6 +1,8 @@
 <template>
-  <div class="tw-grid tw-grid-flow-column tw-grid-cols-5 tw-row-auto tw-gap-4 tw-m-auto tw-">
-    <q-card v-for="p in   productsData  " :key="p.id" class="product-card tw-rounded-lg" rounded>
+  <div class="tw-grid tw-grid-flow-column tw-grid-cols-5 tw-row-auto tw-gap-4 tw-m-auto">
+    <q-card v-for="p in productsData" :key="p.id"
+      class="product-card tw-rounded-lg tw-transform tw-transition tw-duration-500 hover:tw-scale-[103%] hover:tw-bg-zinc-900"
+      rounded>
       <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" src="" />
 
       <q-card-section class="q-py-none tw-py-[7px]">
@@ -17,7 +19,9 @@
 
       <q-card-section class="q-pt-none">
         <div class="text-subtitle1">{{ p.price }}</div>
-        <div :v-if=p.isFreeShipping class="text-caption text-green">Frete Grátis <q-icon name="local_shipping" />
+        <div v-if="p.isFreeShipping" class="text-caption text-green">
+          Frete Grátis
+          <q-icon name="local_shipping" />
         </div>
 
 
