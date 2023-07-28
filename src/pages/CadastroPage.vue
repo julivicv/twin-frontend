@@ -284,7 +284,6 @@ export default {
       togglePassword,
 
       onSubmit() {
-        console.log('aaa');
         if (accept.value === false) {
           $q.notify({
             color: 'red-5',
@@ -301,6 +300,42 @@ export default {
             message: 'Submitted',
             position: 'top-right',
           });
+
+          const data = {
+            nomeUsuario: nomeUsuario.value,
+            email: email.value,
+            senha: senha.value,
+          };
+
+          function cadastraUsuario(body) {
+            const options = {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: Object.keys(body)
+                .map(
+                  (k) =>
+                    `${encodeURIComponent(k)}=${encodeURIComponent(body[k])}`
+                )
+                .join('&'),
+            };
+
+            return fetch(
+              'https://twin-api.onrender.com/api/user',
+              options
+            ).then((T) => T.json());
+          }
+
+          // CONSERTAR ERRO DE CORS E FUTURAMENTE DESCOMENTAR ESSA LINHA
+          // cadastraUsuario(data)
+          //   .then(() => console.log('cadastrado'))
+          //   .catch(() => console.log('falha ao cadastrar'));
+
+          localStorage.setItem("token", "ASDIHDSIADSADSAHIDSHIADHSH");
+
+
+
         }
       },
 
