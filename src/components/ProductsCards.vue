@@ -1,16 +1,28 @@
 <template>
-  <div class="tw-grid tw-grid-flow-column tw-grid-cols-5 tw-row-auto tw-gap-4 tw-m-auto">
-    <q-card v-for="p in productsData" :key="p.id"
+  <div
+    class="tw-grid tw-grid-flow-column xl:tw-grid-cols-5 lg:tw-grid-cols-4 md:tw-grid-cols-2 tw-row-auto tw-gap-4 tw-m-auto"
+  >
+    <q-card
+      v-for="p in productsData"
+      :key="p.id"
       class="product-card tw-rounded-lg tw-transform tw-transition tw-duration-500 hover:tw-scale-[103%] hover:tw-bg-zinc-900"
-      rounded>
+      rounded
+    >
       <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" src="" />
 
       <q-card-section class="q-py-none tw-py-[7px]">
         <div class="tw-w-0 tw-h-0">
-          <q-btn round icon="shopping_cart" class="tw-translate-y-[-47px] tw-translate-x-[175px]" color="primary" />
+          <q-btn
+            round
+            icon="shopping_cart"
+            class="tw-translate-y-[-47px] tw-translate-x-[175px]"
+            color="primary"
+          />
         </div>
         <div class="row no-wrap items-center">
-          <div class="col tw-text-[1.05rem] tw-font-bold tw-break-words tw-line-clamp-2">
+          <div
+            class="col tw-text-[1.05rem] tw-font-bold tw-break-words tw-line-clamp-2"
+          >
             {{ p.name }}
           </div>
         </div>
@@ -23,8 +35,6 @@
           Frete Grátis
           <q-icon name="local_shipping" />
         </div>
-
-
       </q-card-section>
 
       <q-separator />
@@ -36,19 +46,17 @@
 import { defineComponent } from 'vue';
 
 interface ProductData {
-  id: number,
-  name: string,
-  price: string,
-  isFreeShipping: boolean
+  id: number;
+  name: string;
+  price: string;
+  isFreeShipping: boolean;
 }
 
 export default defineComponent({
   name: 'ProductsCards',
   props: { productsData: { type: Array<ProductData> } },
   setup() {
-    return {
-
-    };
+    return {};
   },
 });
 </script>

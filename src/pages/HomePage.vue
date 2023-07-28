@@ -1,4 +1,9 @@
 <template>
+<div>
+   <q-btn label="Página Inicial" />
+   <q-btn/>
+
+</div>
   <div class="q-pa-md q-pt-lg row items-start q-gutter-md">
     <ProductsCards :productsData="productsData" />
   </div>
@@ -21,63 +26,63 @@ export default defineComponent({
           id: 1,
           name: 'Produto 1',
           price: 'R$ 120,00',
-          isFreeShipping: true
+          isFreeShipping: true,
         },
         {
           id: 2,
           name: 'Produto 2',
           price: 'R$ 3550,00',
-          isFreeShipping: false
+          isFreeShipping: false,
         },
         {
           id: 3,
           name: 'Produto 3',
           price: 'R$ 745,00',
-          isFreeShipping: true
+          isFreeShipping: true,
         },
         {
           id: 4,
           name: 'Produto 4',
           price: 'R$ 12,00',
-          isFreeShipping: false
+          isFreeShipping: false,
         },
         {
           id: 5,
           name: 'Produto 5',
           price: 'R$ 23,00',
-          isFreeShipping: true
+          isFreeShipping: true,
         },
         {
           id: 6,
           name: 'Produto 1, mas dessa vez com um título incompreensivelmente colossal',
           price: 'R$ 120,00',
-          isFreeShipping: true
+          isFreeShipping: true,
         },
         {
           id: 7,
           name: 'Produto 2',
           price: 'R$ 3550,00',
-          isFreeShipping: false
+          isFreeShipping: false,
         },
         {
           id: 8,
           name: 'Produto 3',
           price: 'R$ 745,00',
-          isFreeShipping: true
+          isFreeShipping: true,
         },
         {
           id: 9,
           name: 'Produto 4',
           price: 'R$ 12,00',
-          isFreeShipping: true
+          isFreeShipping: true,
         },
         {
           id: 0,
           name: 'Produto 5',
           price: 'R$ 23,00',
-          isFreeShipping: true
+          isFreeShipping: true,
         },
-      ]
+      ],
     };
   },
 });

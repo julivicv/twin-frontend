@@ -8,14 +8,6 @@
             $q.dark.isActive ? 'bg-black tw-gap-4' : 'bg-primary tw-gap-4'
           "
         >
-          <q-btn
-            round
-            dense
-            flat
-            icon="menu"
-            class="q-mr-xs"
-            @click="toggleLeftDrawer()"
-          />
           <q-avatar class="gt-xs">
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
           </q-avatar>
@@ -99,18 +91,7 @@
         elevated
         class="bg-white text-black"
       >
-        <q-scroll-area
-          class="menu-list"
-          style="height: calc(100% - 90px); margin-top: 90px"
-        >
-          <q-list>
-            <EssentialLink
-              v-for="link in essentialLinks"
-              :key="link.title"
-              v-bind="link"
-            />
-          </q-list>
-        </q-scroll-area>
+        
         <q-img
           class="absolute-top tw-h-[90px] tw-items-center"
           src="https://cdn.quasar.dev/img/material.png"
@@ -143,77 +124,25 @@
 import { defineComponent, ref } from 'vue';
 import EssentialLink from '../components/EssentialLink.vue';
 
-const linksList = [
-  {
-    title: 'Placeholder',
-    icon: 'school',
-    link: '#',
-  },
-  {
-    title: 'Placeholder',
-    icon: 'code',
-    link: '#',
-  },
-  {
-    title: 'Placeholder',
-    icon: 'chat',
-    link: '#',
-  },
-  {
-    title: 'Placeholder',
-    icon: 'record_voice_over',
-    link: '#',
-  },
-  {
-    title: 'Placeholder',
-    icon: 'rss_feed',
-    link: '#',
-  },
-  {
-    title: 'Placeholder',
-    icon: 'public',
-    link: '#',
-  },
-  {
-    title: 'Placeholder',
-    icon: 'favorite',
-    link: '#',
-  },
-];
 
 export default defineComponent({
   name: 'HeaderLayout',
 
   components: {
-    EssentialLink,
-  },
-
-  methods: {
-    toggleSettingsPopover: function () {
-      this.displaySettingsMenu = !this.displaySettingsMenu;
-    },
   },
 
   setup() {
-    const leftDrawerOpen = ref(false);
-    const displaySettingsMenu = ref(false);
     const user = {
       name: 'Korra',
       email: 'korra@gmail.com',
       img: 'https://i.pinimg.com/originals/c5/01/79/c50179d3ea995d618a7bd0cd0e1e1b89.jpg',
     };
-    const isAuthenticated = ref(false);
+    const isAuthenticated = ref(true);
 
     return {
       text: ref(''),
-      essentialLinks: linksList,
-      leftDrawerOpen,
       user,
       isAuthenticated,
-      displaySettingsMenu,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
       login() {
         isAuthenticated.value
           ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
