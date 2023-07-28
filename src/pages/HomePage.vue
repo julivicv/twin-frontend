@@ -1,9 +1,4 @@
 <template>
-<div>
-   <q-btn label="Página Inicial" />
-   <q-btn/>
-
-</div>
   <div class="q-pa-md q-pt-lg row items-start q-gutter-md">
     <ProductsCards :productsData="productsData" />
   </div>

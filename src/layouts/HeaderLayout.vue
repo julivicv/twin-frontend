@@ -54,14 +54,14 @@
             <q-menu fit>
               <q-list style="min-width: 100px">
                 <q-item clickable>
-                  <q-item-section>New tab</q-item-section>
+                  <q-item-section>Carrinho</q-item-section>
                 </q-item>
                 <q-item clickable>
-                  <q-item-section>New incognito tab</q-item-section>
+                  <q-item-section>Favoritos</q-item-section>
                 </q-item>
                 <q-separator />
                 <q-item clickable>
-                  <q-item-section>Recent tabs</q-item-section>
+                  <q-item-section>Editar Perfil</q-item-section>
                 </q-item>
                 <q-item clickable>
                   <q-item-section>History</q-item-section>
@@ -82,7 +82,16 @@
           </q-avatar>
           <q-icon name="shopping_cart" size="md" class="q-mr-lg"></q-icon>
         </q-toolbar>
+        <div class="">
+    <q-btn label="Página Inicial" c />
+    <q-btn label="Categorias"/>
+    <q-btn label="Produtos"/> 
+  <q-btn label="Lojas"/>  
+    <q-btn label="Contato"/>
+  </div>
       </q-header>
+
+      
 
       <q-drawer
         v-model="leftDrawerOpen"
@@ -118,7 +127,8 @@
       </q-page-container>
     </q-layout>
   </div>
-</template>
+  
+</template> 
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
