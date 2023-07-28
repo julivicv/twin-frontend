@@ -98,7 +98,6 @@ import { useQuasar } from 'quasar';
 //eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 import anime from 'animejs';
-import axios from 'axios';
 
 export default {
   methods: {

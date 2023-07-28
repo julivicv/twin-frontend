@@ -308,7 +308,6 @@ export default {
         nomeUsuario.value = null;
         senha.value = null;
         email.value = null;
-        confirmSenha.value = null;
         accept.value = false;
       },
     };
