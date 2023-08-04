@@ -86,12 +86,15 @@
           <q-icon name="shopping_cart" size="md" class="q-mr-lg"></q-icon>
         </q-toolbar>
         <div class="">
-          <q-btn label="Página Inicial" c />
-          <q-btn label="Categorias" />
-          <q-btn label="Produtos" />
-          <q-btn label="Lojas" />
-          <q-btn label="Contato" />
-        </div>
+        <q-btn label="Página Inicial" class="butao" />
+          <a class="butao">PÁGINA INICIAL</a>
+          <a class="butao">CATEGORIAS</a>
+          <a class="butao">PRODUTOS</a>
+          <a class="butao">LOJAS</a>
+          <a class="butao">CONTATO</a>
+          <a class="butao">CRIE SEU E-COMMERCE</a>
+
+</div>
       </q-header>
 
       <q-drawer
@@ -168,5 +171,11 @@ export default defineComponent({
 }
 .menu-list {
   height: full;
+}
+
+.butao{
+  background-color:black;
+  color:white;
+
 }
 </style>
