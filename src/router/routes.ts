@@ -16,6 +16,14 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
+    path: '/confirmEmail',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/ConfirmEmail.vue') },
+    ],
+  },
+
+  {
     path: '/Cadastro',
     component: () => import('layouts/MainLayout.vue'),
     children: [
@@ -25,7 +33,7 @@ const routes: RouteRecordRaw[] = [
 
   {
     path: '/home',
-    meta: {requiresAuth: true},
+    meta: {requiresAuth: false},
     component: () => import('layouts/HeaderLayout.vue'),
     children: [{ path: '', component: () => import('src/pages/HomePage.vue') }],
   },
