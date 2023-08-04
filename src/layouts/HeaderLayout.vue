@@ -48,7 +48,10 @@
             >Cadastro</router-link
           >
 
-          <span v-if="isAuthenticated">Olá {{ user.name }}</span>
+          <div v-if="isAuthenticated" class="text-weight-bold">
+            Olá, {{ user.name }}
+          </div>
+          <div v-else class="text-weight-bold">Olá, logue-se</div>
           <q-avatar v-if="isAuthenticated" class="q-mr-sm">
             <img :src="user.img" />
             <q-menu fit>
@@ -83,15 +86,13 @@
           <q-icon name="shopping_cart" size="md" class="q-mr-lg"></q-icon>
         </q-toolbar>
         <div class="">
-    <q-btn label="Página Inicial" c />
-    <q-btn label="Categorias"/>
-    <q-btn label="Produtos"/> 
-  <q-btn label="Lojas"/>  
-    <q-btn label="Contato"/>
-  </div>
+          <q-btn label="Página Inicial" c />
+          <q-btn label="Categorias" />
+          <q-btn label="Produtos" />
+          <q-btn label="Lojas" />
+          <q-btn label="Contato" />
+        </div>
       </q-header>
-
-      
 
       <q-drawer
         v-model="leftDrawerOpen"
@@ -100,7 +101,6 @@
         elevated
         class="bg-white text-black"
       >
-        
         <q-img
           class="absolute-top tw-h-[90px] tw-items-center"
           src="https://cdn.quasar.dev/img/material.png"
@@ -127,19 +127,16 @@
       </q-page-container>
     </q-layout>
   </div>
-  
-</template> 
+</template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import EssentialLink from '../components/EssentialLink.vue';
 
-
 export default defineComponent({
   name: 'HeaderLayout',
 
-  components: {
-  },
+  components: {},
 
   setup() {
     const user = {
@@ -147,7 +144,7 @@ export default defineComponent({
       email: 'korra@gmail.com',
       img: 'https://i.pinimg.com/originals/c5/01/79/c50179d3ea995d618a7bd0cd0e1e1b89.jpg',
     };
-    const isAuthenticated = ref(true);
+    const isAuthenticated = ref(localStorage.getItem('token') !== null);
 
     return {
       text: ref(''),

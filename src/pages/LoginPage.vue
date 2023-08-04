@@ -9,14 +9,19 @@
           <q-input
             standout
             rounded
-            v-model="login"
-            label="login"
+            v-model="email"
+            label="Email"
             lazy-rules
             :rules="[
               (val) =>
-                (val && val.length > 0) ||
-                'Por favor, digite um login de acesso.',
+                (val !== null && val !== '') ||
+                'Por favor, digite um email para realizar o login',
+              (val) =>
+                /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi.test(
+                  val
+                ) || 'Email inválido',
             ]"
+            type="email"
           >
             <template v-slot:prepend>
               <q-icon name="person" />
@@ -33,8 +38,6 @@
               (val) =>
                 (val !== null && val !== '') ||
                 'Por favor, digite uma senha de acesso.',
-              (val) =>
-                (val > 0 && val < 100) || 'Senha inválida ou insuficiente.',
             ]"
             :type="passwordType"
           >
@@ -56,11 +59,20 @@
 
           <div class="flex">
             <q-btn
+              v-if="!isLoading"
               class="tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
               label="Logar"
               type="submit"
               color="primary"
             />
+
+            <q-btn
+              v-else
+              class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
+              color="primary"
+            >
+              <q-spinner />
+            </q-btn>
           </div>
         </q-form>
       </div>
@@ -148,8 +160,9 @@ export default {
   },
   setup() {
     const $q = useQuasar();
+    const isLoading = ref(false);
 
-    const login = ref(null);
+    const email = ref(null);
     const senha = ref(null);
     const top = ref(false);
     const right = ref(false);
@@ -162,7 +175,8 @@ export default {
         passwordType.value == 'password' ? 'text' : 'password');
 
     return {
-      login,
+      isLoading,
+      email,
       senha,
       top,
       right,
@@ -171,12 +185,47 @@ export default {
       passwordType,
 
       onSubmit() {
-        $q.notify({
-          color: 'green-4',
-          textColor: 'white',
-          icon: 'cloud_done',
-          message: 'Submitted',
-        });
+        isLoading.value = true;
+        const data = {
+          email: email.value,
+          password: senha.value,
+        };
+
+        function logarUsuario(body) {
+          const options = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+          };
+
+          return fetch(
+            'https://twin-api.onrender.com/api/user/login',
+            options
+          ).then((T) => T.json());
+        }
+
+        logarUsuario(data)
+          .then((response) => {
+            console.log(response);
+            // localStorage.setItem('token', response.data);
+            if (response.message == 'success') {
+              $q.notify({
+                color: 'green-5',
+                textColor: 'white',
+                icon: 'success',
+                message: 'Usuário autenticado com sucesso!',
+                position: 'top-right',
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            isLoading.value = false;
+          });
       },
     };
   },

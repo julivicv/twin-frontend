@@ -92,8 +92,11 @@
               (val !== null && val !== '') ||
               'Por favor, digite uma senha de acesso.',
             (val) =>
-              (val.toString().length > 6 && val.toString().length < 120) ||
+              (val.toString().length >= 6 && val.toString().length <= 120) ||
               'Senha inválida ou insuficiente.',
+            (val) =>
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(val) ||
+              'A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula e pelo menos um número.',
           ]"
           :type="passwordType"
         >
@@ -130,11 +133,20 @@
 
         <div>
           <q-btn
+            v-if="!isLoading"
             label="Continuar"
             type="submit"
             class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
             color="primary"
           />
+
+          <q-btn
+            v-else
+            class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
+            color="primary"
+          >
+            <q-spinner />
+          </q-btn>
         </div>
       </q-form>
     </div>
@@ -251,6 +263,7 @@ export default {
   },
   setup() {
     const $q = useQuasar();
+    const isLoading = ref(false);
 
     const nomeUsuario = ref(null);
     const senha = ref(null);
@@ -271,6 +284,7 @@ export default {
     );
 
     return {
+      isLoading,
       nomeUsuario,
       confirmSenha,
       email,
@@ -293,32 +307,20 @@ export default {
             position: 'top-right',
           });
         } else {
-          $q.notify({
-            color: 'green-4',
-            textColor: 'white',
-            icon: 'cloud_done',
-            message: 'Submitted',
-            position: 'top-right',
-          });
-
+          isLoading.value = true;
           const data = {
-            nomeUsuario: nomeUsuario.value,
+            name: nomeUsuario.value,
             email: email.value,
-            senha: senha.value,
+            password: senha.value,
           };
 
           function cadastraUsuario(body) {
             const options = {
               method: 'POST',
               headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
               },
-              body: Object.keys(body)
-                .map(
-                  (k) =>
-                    `${encodeURIComponent(k)}=${encodeURIComponent(body[k])}`
-                )
-                .join('&'),
+              body: JSON.stringify(body),
             };
 
             return fetch(
@@ -327,15 +329,25 @@ export default {
             ).then((T) => T.json());
           }
 
-          // CONSERTAR ERRO DE CORS E FUTURAMENTE DESCOMENTAR ESSA LINHA
-          // cadastraUsuario(data)
-          //   .then(() => console.log('cadastrado'))
-          //   .catch(() => console.log('falha ao cadastrar'));
-
-          localStorage.setItem("token", "ASDIHDSIADSADSAHIDSHIADHSH");
-
-
-
+          cadastraUsuario(data)
+            .then((response) => {
+              localStorage.setItem('token', response.data);
+              if (response.message == 'success') {
+                $q.notify({
+                  color: 'green-5',
+                  textColor: 'white',
+                  icon: 'success',
+                  message: 'Usuário cadastrado com sucesso!',
+                  position: 'top-right',
+                });
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            })
+            .finally(() => {
+              isLoading.value = false;
+            });
         }
       },
 
