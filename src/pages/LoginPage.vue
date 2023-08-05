@@ -1,76 +1,44 @@
 <template>
   <q-layout>
     <q-page class="column items-center justify-evenly">
-      <img class="absolute-top-left" src="../assets/twinny_left.svg" alt="" />
-      <div
-        class="tw-flex tw-items-center tw-w-[60%] tw-justify-center form-container login-form-container self-start"
-      >
+      <a href='/home'>
+        <img class="absolute-top-left" src="../assets/twinny_left.svg" alt="" />
+      </a>
+      <div class="tw-flex tw-items-center tw-w-[60%] tw-justify-center form-container login-form-container self-start">
         <q-form @submit="onSubmit" class="q-gutter-md login-form tw-w-[40%]">
-          <q-input
-            standout
-            rounded
-            v-model="email"
-            label="Email"
-            lazy-rules
-            :rules="[
-              (val) =>
-                (val !== null && val !== '') ||
-                'Por favor, digite um email para realizar o login',
-              (val) =>
-                /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi.test(
-                  val
-                ) || 'Email inválido',
-            ]"
-            type="email"
-          >
+          <q-input standout rounded v-model="email" label="Email" lazy-rules :rules="[
+            (val) =>
+              (val !== null && val !== '') ||
+              'Por favor, digite um email para realizar o login',
+            (val) =>
+              /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi.test(
+                val
+              ) || 'Email inválido',
+          ]" type="email">
             <template v-slot:prepend>
               <q-icon name="person" />
             </template>
           </q-input>
 
-          <q-input
-            standout
-            rounded
-            v-model="senha"
-            label="Senha"
-            lazy-rules
-            :rules="[
-              (val) =>
-                (val !== null && val !== '') ||
-                'Por favor, digite uma senha de acesso.',
-            ]"
-            :type="passwordType"
-          >
+          <q-input standout rounded v-model="senha" label="Senha" lazy-rules :rules="[
+            (val) =>
+              (val !== null && val !== '') ||
+              'Por favor, digite uma senha de acesso.',
+          ]" :type="passwordType">
             <template v-slot:prepend>
-              <q-icon
-                v-if="passwordType === 'password'"
-                class="cursor-pointer"
-                @click="togglePassword"
-                name="lock"
-              />
-              <q-icon
-                v-if="passwordType === 'text'"
-                class="cursor-pointer"
-                @click="togglePassword"
-                name="lock_open"
-              />
+              <q-icon v-if="passwordType === 'password'" class="cursor-pointer" @click="togglePassword" name="lock" />
+              <q-icon v-if="passwordType === 'text'" class="cursor-pointer" @click="togglePassword" name="lock_open" />
             </template>
           </q-input>
 
           <div class="flex">
-            <q-btn
-              v-if="!isLoading"
-              class="tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
-              label="Logar"
-              type="submit"
-              color="primary"
-            />
+            <q-btn v-if="!isLoading" class="tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto" label="Logar" type="submit"
+              color="primary" />
 
-            <q-btn
-              v-else
-              class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
-              color="primary"
-            >
+            <q-btn v-if="!isLoading" class="tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto" label="Cadastro" to="/cadastro"
+              color="secondary" />
+
+            <q-btn v-else class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto" color="primary">
               <q-spinner />
             </q-btn>
           </div>
@@ -81,24 +49,9 @@
           <h1 class="title">Bem Vindo(a)!</h1>
           <span class="subtitle">Faça o login para continuar</span>
         </div>
-        <img
-          ref="top"
-          class="bubbles btop"
-          src="../assets/bubbles_top.svg"
-          alt=""
-        />
-        <img
-          ref="right"
-          class="bubbles bright"
-          src="../assets/bubbles_right.svg"
-          alt=""
-        />
-        <img
-          ref="bottom"
-          class="bubbles bbottom"
-          src="../assets/bubbles_bottom.svg"
-          alt=""
-        />
+        <img ref="top" class="bubbles btop" src="../assets/bubbles_top.svg" alt="" />
+        <img ref="right" class="bubbles bright" src="../assets/bubbles_right.svg" alt="" />
+        <img ref="bottom" class="bubbles bbottom" src="../assets/bubbles_bottom.svg" alt="" />
       </div>
     </q-page>
   </q-layout>
@@ -171,8 +124,8 @@ export default {
     $q.dark.set(true);
 
     const togglePassword = () =>
-      (passwordType.value =
-        passwordType.value == 'password' ? 'text' : 'password');
+    (passwordType.value =
+      passwordType.value == 'password' ? 'text' : 'password');
 
     return {
       isLoading,
@@ -191,7 +144,7 @@ export default {
           password: senha.value,
         };
 
-        function logarUsuario(body) {
+        function logarUsuario(body: any) {
           const options = {
             method: 'POST',
             headers: {
@@ -199,29 +152,39 @@ export default {
             },
             body: JSON.stringify(body),
           };
-
+          const api = `http://localhost:8080/api/`
           return fetch(
-            'https://twin-api.onrender.com/api/user/login',
+            `${api}user/login`,
             options
           ).then((T) => T.json());
         }
 
         logarUsuario(data)
           .then((response) => {
-            console.log(response);
-            // localStorage.setItem('token', response.data);
-            if (response.message == 'success') {
-              $q.notify({
-                color: 'green-5',
-                textColor: 'white',
-                icon: 'success',
-                message: 'Usuário autenticado com sucesso!',
-                position: 'top-right',
-              });
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('name', response.name);
+            localStorage.setItem('email', response.email);
+            if (response.error) {
+              throw new Error(response.message);
             }
+            $q.notify({
+              color: 'green-5',
+              textColor: 'white',
+              icon: 'success',
+              message: 'Usuário autenticado com sucesso!',
+              position: 'top-right',
+            });
+
+            location.href = '/home';
           })
           .catch((error) => {
-            console.log(error);
+            $q.notify({
+              color: 'red-5',
+              textColor: 'white',
+              icon: 'error',
+              message: error.message,
+              position: 'top-right',
+            });
           })
           .finally(() => {
             isLoading.value = false;
@@ -237,25 +200,31 @@ export default {
   background-image: linear-gradient(to top right, $secondary, $primary);
   height: 100vh;
 }
+
 .bubbles {
   position: absolute;
 }
+
 .btop {
   top: -110px;
   left: calc(100vw - 35%);
 }
+
 .bright {
   left: calc(100vw - 110px);
   top: -70px;
 }
+
 .bbottom {
   bottom: -110px;
   left: calc(100vw - 40%);
 }
+
 .q-page {
   overflow-x: hidden;
   overflow-y: hidden;
 }
+
 .title {
   font-family: 'Passion One', cursive;
   font-weight: bold;
@@ -263,6 +232,7 @@ export default {
   color: $primary;
   z-index: 1;
 }
+
 .title-container {
   top: 45vh;
   left: 71vw;
@@ -270,6 +240,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
 .subtitle {
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 15pt;

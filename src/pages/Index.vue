@@ -32,8 +32,8 @@
       </div>
 
       <div class="q-pa-lg flex flex-center">
-        <q-pagination v-model="current" color="deep-orange" :max="25" :max-pages="6" :boundary-numbers="false" boundary -
-          links direction-links />
+        <q-pagination v-model="current" color="deep-orange" :max="25" :max-pages="6" :boundary-numbers="false"
+          boundary-links direction-links />
       </div>
 
       <div class="tw-flex tw-m-5">
@@ -42,15 +42,23 @@
       </div>
 
       <div class="tw-mx-5">
+        <ShopsCards :shopsData="shopsData" />
       </div>
     </div>
   </q-page>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, computed } from 'vue';
+import { defineComponent, ref, Ref, watch } from 'vue';
 import ProductsCards from '../components/ProductsCards.vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import ShopsCards from '../components/ShopCards.vue';
+
+interface ShopData {
+  id: number;
+  title: string;
+}
+
 
 interface ProductData {
   id: number;
@@ -63,17 +71,60 @@ export default defineComponent({
   name: 'IndexPage',
   components: {
     ProductsCards,
+    ShopsCards
   },
   setup() {
+    const route = useRoute();
+    const router = useRouter();
+    const page: any = route.query.page ? route.query.page : 1
+    const current = ref(parseInt(page))
+
     const meta = ref({
       totalCount: 1200,
     });
 
     const api = `http://localhost:8080/api`;
 
+    const getShop = async () => {
+      try {
+        const response = await fetch(`${api}/shop/list/10/0`, {
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch products');
+        }
+
+        const data = await response.json();
+
+        const shops = data.data.map((shop: any) => {
+          return {
+            id: shop.id,
+            title: shop.title,
+          };
+        });
+
+        return shops as ShopData[];
+
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    }
+
+    var shopsData: Ref<ShopData[]> = ref([]);
+    // You need to call the async function and assign the result to productsData
+    getShop().then((data) => {
+      shopsData.value = data;
+    });
+
+    console.log(shopsData);
+
     const getProduct = async (): Promise<ProductData[]> => {
       try {
-        const response = await fetch(`${api}/product/list/50/0`, {
+        const response = await fetch(`${api}/product/list/15/${(page - 1) * 15}`, {
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('token')}`
           }
@@ -103,19 +154,20 @@ export default defineComponent({
 
     const productsData: Ref<ProductData[]> = ref([]);
 
+    // You need to call the async function and assign the result to productsData
     getProduct().then((data) => {
       productsData.value = data;
     });
 
-    console.log(productsData);
-
-    const route = useRoute()
-    const page: any = route.query.page
+    watch(current, (newValue, oldValue) => {
+      router.replace({ query: { page: newValue } })
+    })
 
     return {
-      current: ref(parseInt(page)),
+      current,
       meta,
-      productsData
+      productsData,
+      shopsData
     };
   },
 });
