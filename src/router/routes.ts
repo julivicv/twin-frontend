@@ -4,7 +4,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/HeaderLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
+    children: [{ path: '', component: () => import('pages/Index.vue') }],
   },
 
   {
@@ -12,6 +12,14 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('src/pages/LoginPage.vue') },
+    ],
+  },
+
+  {
+    path: '/createShop',
+    component: () => import('layouts/HeaderLayout.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/CreateStorePage.vue') },
     ],
   },
 
@@ -33,7 +41,7 @@ const routes: RouteRecordRaw[] = [
 
   {
     path: '/home',
-    meta: {requiresAuth: false},
+    meta: { requiresAuth: false },
     component: () => import('layouts/HeaderLayout.vue'),
     children: [{ path: '', component: () => import('src/pages/HomePage.vue') }],
   },
