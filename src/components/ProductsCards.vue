@@ -1,11 +1,10 @@
 <template>
   <div
     class="tw-grid tw-grid-flow-column xl:tw-grid-cols-5 lg:tw-grid-cols-4 md:tw-grid-cols-2 tw-row-auto tw-gap-4 tw-m-auto">
-
-    <q-card @click="redirectToProductPage(p.id)" v-for="p in productsData" :key="p.id"
+    <q-card v-for="p in productsData" :key="p.id"
       class="product-card tw-rounded-lg tw-transform tw-transition tw-duration-500 hover:tw-scale-[103%] hover:tw-bg-zinc-900"
       rounded>
-      <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" :src="'https://twin-api.onrender.com' + p.image" />
+      <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" :src="'http://localhost:8080' + p.image" />
 
       <q-card-section class="q-py-none tw-py-[7px]">
         <div class="tw-w-0 tw-h-0">
@@ -23,13 +22,11 @@
       </q-card-section>
       <q-separator />
     </q-card>
-
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { ref } from 'vue';
 
 interface ProductData {
   id: number;
@@ -39,19 +36,13 @@ interface ProductData {
 }
 
 export default defineComponent({
-
   name: 'ProductsCards',
   props: {
     page: { type: Number }
   },
-  methods: {
-    redirectToProductPage(productId: number) {
-      // Replace the following line with the actual URL of the product page and any routing logic you have
-      window.location.href = `#/product/${productId}`;
-    },
-  },
   setup(props) {
-    const api = `https://twin-api.onrender.com/api`;
+    const api = `http://localhost:8080/api`;
+    let productsData: any = []
     const getProduct = async (): Promise<ProductData[]> => {
       try {
         const response = await fetch(`${api}/product/list/15/${props.page ? ((props.page - 1) * 15) : ''}`, {
@@ -74,18 +65,13 @@ export default defineComponent({
             image: product.url,
           };
         });
-        return productData;
+        console.log(productData)
+        return productsData = productData;
       } catch (error) {
         console.error(error);
         return [];
       }
     };
-
-    const productsData = ref<ProductData[]>([]);
-
-    getProduct().then((data) => {
-      productsData.value = data
-    })
     return { productsData };
   },
 });

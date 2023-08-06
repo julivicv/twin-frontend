@@ -2,7 +2,7 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/:page?',
+    path: '/',
     component: () => import('layouts/HeaderLayout.vue'),
     children: [{ path: '', component: () => import('pages/Index.vue') }],
   },
@@ -46,13 +46,8 @@ const routes: RouteRecordRaw[] = [
     children: [{ path: '', component: () => import('src/pages/HomePage.vue') }],
   },
 
-  {
-    path: '/product/:id',
-    component: () => import('layouts/HeaderLayout.vue'),
-    children: [
-      { path: '', component: () => import('src/pages/ProductPage.vue') },
-    ],
-  },
+  // Always leave this as last one,
+  // but you can also remove it
   {
     path: '/:catchAll(.*)*',
     component: () => import('pages/ErrorNotFound.vue'),
