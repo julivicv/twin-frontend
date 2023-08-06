@@ -3,7 +3,7 @@
     <q-layout view="hHh Lpr lff">
       <q-header elevated>
         <q-toolbar elevated class="$tw-gap-[16px]'">
-          <img class="tw-w-20" src="../assets/twinny.png" />
+          <img class="tw-w-14" src="../assets/twinny.png" />
 
           <q-space />
 
@@ -30,12 +30,10 @@
                 <q-item clickable>
                   <q-item-section v-on:click="leave">Sair</q-item-section>
                 </q-item>
-              </q-list>
-            </q-menu>
-          </q-avatar>
-          <q-icon name="shopping_cart" size="md" class="q-mr-lg"></q-icon>
-        </q-toolbar>
-        <div class="tw-flex tw-p-5 tw-bg-slate-50 tw-justify-between tw-text-black">
+                <q-item clickable>
+                  <q-item-section>Suas Lojas</q-item-section>
+
+        <div class="tw-flex tw-p-3 tw-bg-slate-50 tw-justify-between tw-text-black">
           <nav class="tw-flex tw-gap-4">
             <router-link to="/">PÁGINA INICIAL</router-link>
             <router-link to="/">CATEGORIAS</router-link>

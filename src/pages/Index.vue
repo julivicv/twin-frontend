@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page :key="$route.fullPath">
     <div class="tw-bg-black tw-p-5 tw-text-white tw-w-full tw-min-h-screen">
       <div class="header tw-flex tw-m-5 tw-bg-[#D95D39] tw-p-10 tw-text-5xl tw-font-bold">
         <div class="">
@@ -28,12 +28,12 @@
         <h3 class="tw-text-4xl tw-w-full tw-py-5 tw-border-b tw-border-gray-500">Produtos</h3>
       </div>
       <div class="tw-mx-5">
-        <ProductsCards :productsData="productsData" />
+        <ProductsCards :page="page" />
       </div>
 
       <div class="q-pa-lg flex flex-center">
-        <q-pagination v-model="current" color="deep-orange" :max="25" :max-pages="6" :boundary-numbers="false"
-          boundary-links direction-links />
+        <q-pagination v-model="current" :model-value="page" @update:model-value="updateModal" color="deep-orange"
+          :max="25" :max-pages="6" boundary-links direction-links />
       </div>
 
       <div class="tw-flex tw-m-5">
@@ -49,10 +49,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, watch } from 'vue';
+import { defineComponent, ref, Ref } from 'vue';
 import ProductsCards from '../components/ProductsCards.vue';
-import { useRoute, useRouter } from 'vue-router';
 import ShopsCards from '../components/ShopCards.vue';
+import { useRoute, useRouter } from 'vue-router';
 
 interface ShopData {
   id: number;
@@ -74,16 +74,20 @@ export default defineComponent({
     ShopsCards
   },
   setup() {
-    const route = useRoute();
     const router = useRouter();
-    const page: any = route.query.page ? route.query.page : 1
-    const current = ref(parseInt(page))
 
+    const route = useRoute();
+    const page = ref(route.query.page ? parseInt(route.query.page as string) : 1);
+
+    const updateModal = (val: number) => {
+      console.log(val);
+      router.push({ query: { page: val } });
+      page.value = val;
+    }
     const meta = ref({
       totalCount: 1200,
     });
-
-    const api = `http://localhost:8080/api`;
+    const api = `https://twin-api.onrender.com/api`;
 
     const getShop = async () => {
       try {
@@ -115,59 +119,16 @@ export default defineComponent({
     }
 
     var shopsData: Ref<ShopData[]> = ref([]);
-    // You need to call the async function and assign the result to productsData
     getShop().then((data) => {
       shopsData.value = data;
     });
 
-    console.log(shopsData);
-
-    const getProduct = async (): Promise<ProductData[]> => {
-      try {
-        const response = await fetch(`${api}/product/list/15/${(page - 1) * 15}`, {
-          headers: {
-            "Authorization": `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch products');
-        }
-
-        const data = await response.json();
-
-        const products = data.product.map((product: any) => {
-          return {
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.url,
-          };
-        });
-
-        return products as ProductData[];
-      } catch (error) {
-        console.error(error);
-        return [];
-      }
-    };
-
-    const productsData: Ref<ProductData[]> = ref([]);
-
-    // You need to call the async function and assign the result to productsData
-    getProduct().then((data) => {
-      productsData.value = data;
-    });
-
-    watch(current, (newValue, oldValue) => {
-      router.replace({ query: { page: newValue } })
-    })
-
     return {
-      current,
       meta,
-      productsData,
-      shopsData
+      shopsData,
+      page,
+      updateModal
+
     };
   },
 });
