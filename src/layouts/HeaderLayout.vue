@@ -32,12 +32,7 @@
                 </q-item>
                 <q-item clickable>
                   <q-item-section>Suas Lojas</q-item-section>
-                </q-item>
-              </q-list>
-            </q-menu>
-          </q-avatar>
-          <q-icon name="shopping_cart" size="md" class="q-mr-lg"></q-icon>
-        </q-toolbar>
+
         <div class="tw-flex tw-p-3 tw-bg-slate-50 tw-justify-between tw-text-black">
           <nav class="tw-flex tw-gap-4">
             <router-link to="/">PÁGINA INICIAL</router-link>

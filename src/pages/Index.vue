@@ -89,10 +89,6 @@ export default defineComponent({
     });
     const api = `https://twin-api.onrender.com/api`;
 
-
-
-
-
     const getShop = async () => {
       try {
         const response = await fetch(`${api}/shop/list/10/0`, {
@@ -127,12 +123,12 @@ export default defineComponent({
       shopsData.value = data;
     });
 
-
     return {
       meta,
       shopsData,
       page,
       updateModal
+
     };
   },
 });

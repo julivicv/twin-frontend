@@ -86,7 +86,6 @@ export default defineComponent({
     getProduct().then((data) => {
       productsData.value = data
     })
-
     return { productsData };
   },
 });
