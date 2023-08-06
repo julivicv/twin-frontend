@@ -30,6 +30,23 @@
                 <q-item clickable>
                   <q-item-section v-on:click="leave">Sair</q-item-section>
                 </q-item>
+<<<<<<< HEAD
+              </q-list>
+            </q-menu>
+          </q-avatar>
+          <q-icon name="shopping_cart" size="md" class="q-mr-lg"></q-icon>
+        </q-toolbar>
+        <div class="tw-flex tw-p-5 tw-bg-slate-50 tw-justify-between tw-text-black">
+          <nav class="tw-flex tw-gap-4">
+            <router-link to="/">PÁGINA INICIAL</router-link>
+            <router-link to="/">CATEGORIAS</router-link>
+            <router-link to="/">PRODUTOS</router-link>
+            <router-link to="/">LOJAS</router-link>
+            <router-link to="/contato">CONTATO</router-link>
+          </nav>
+          <a href="">CRIE SEU E-COMERCE</a>
+        </div>
+=======
                 <q-item clickable>
                   <q-item-section>Suas Lojas</q-item-section>
                 </q-item>
@@ -37,6 +54,7 @@
             </q-menu>
           </q-avatar>
 
+<<<<<<< HEAD
           <div class="tw-flex tw-p-3 tw-bg-slate-50 tw-justify-between tw-text-black">
             <nav class="tw-flex tw-gap-4">
               <router-link to="/">PÁGINA INICIAL</router-link>
@@ -47,6 +65,19 @@
             </nav>
             <a href="">CRIE SEU E-COMERCE</a>
           </div>
+=======
+                <div class="tw-flex tw-p-3 tw-bg-slate-50 tw-justify-between tw-text-black">
+                  <nav class="tw-flex tw-gap-4">
+                    <router-link to="/">PÁGINA INICIAL</router-link>
+                    <router-link to="/">CATEGORIAS</router-link>
+                    <router-link to="/">PRODUTOS</router-link>
+                    <router-link to="/">LOJAS</router-link>
+                    <router-link to="/">CONTATO</router-link>
+                  </nav>
+                  <a href="">CRIE SEU E-COMERCE</a>
+                </div>
+>>>>>>> 4748f33b7ada57bf57ca6ec780b46b6228f8b276
+>>>>>>> 6d2b40f7e944fcaaa0a512b20a72fbce3f34340f
       </q-header>
 
       <q-drawer v-model="leftDrawerOpen" :width="300" :breakpoint="700" elevated class="bg-white text-black">
@@ -74,7 +105,6 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import EssentialLink from '../components/EssentialLink.vue';
 
 export default defineComponent({
   name: 'HeaderLayout',

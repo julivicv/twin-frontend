@@ -16,12 +16,29 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
+    path: '/createProduct',
+    component: () => import('layouts/HeaderLayout.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/CreateProductPage.vue') },
+    ],
+  },
+
+  {
     path: '/createShop',
     component: () => import('layouts/HeaderLayout.vue'),
     children: [
       { path: '', component: () => import('src/pages/CreateStorePage.vue') },
     ],
   },
+
+  {
+    path: '/contato',
+    component: () => import('layouts/HeaderLayout.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/ContatoPage.vue') },
+    ],
+  },
+  
 
   {
     path: '/confirmEmail',
