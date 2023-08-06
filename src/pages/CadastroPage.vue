@@ -199,7 +199,7 @@ export default {
     const $q = useQuasar();
     const isLoading = ref(false);
 
-    const api = `https://twin-api.onrender.com/api`
+    const api = process.env.API
     const nomeUsuario = ref(null);
     const senha = ref(null);
     const confirmSenha = ref(null);

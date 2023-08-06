@@ -138,6 +138,8 @@ export default {
     var passwordType = ref('password');
     $q.dark.set(true);
 
+    const api = process.env.API;
+
     const togglePassword = () => (
       (passwordType.value =
         passwordType.value == 'password' ? 'text' : 'password'),
@@ -185,7 +187,7 @@ export default {
             };
 
             return fetch(
-              'https://twin-api.onrender.com/api/user',
+              api,
               options
             ).then((T) => T.json());
           }

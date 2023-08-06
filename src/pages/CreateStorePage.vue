@@ -38,12 +38,12 @@ export default {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              "Authorization": `Bearer ${localStorage.getItem('token')}`
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(body),
           };
-          const api = `https://twin-api.onrender.com/api/`;
-          return fetch(`${api}shop`, options).then((T) => T.json());
+          const api = process.env.API;
+          return fetch(`${api}/shop`, options).then((T) => T.json());
         }
 
         createStore(data)

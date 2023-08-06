@@ -152,9 +152,9 @@ export default {
             },
             body: JSON.stringify(body),
           };
-          const api = `https://twin-api.onrender.com/api/`
+          const api = process.env.API
           return fetch(
-            `${api}user/login`,
+            `${api}/user/login`,
             options
           ).then((T) => T.json());
         }

@@ -27,13 +27,13 @@ export default defineComponent({
     const route = useRoute();
 
     const page = route.params.id
-    const api = `https://twin-api.onrender.com/api`;
+    const api = process.env.API;
 
     const getProductData = async () => {
       try {
         const response = await fetch(api + `/product/${page}`, {
           headers: {
-            "Authorization": `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
         });
 
@@ -45,7 +45,7 @@ export default defineComponent({
         const data = await response.json();
         product.value = data.product;
       } catch (error) {
-        console.error("Error fetching product data:", error);
+        console.error('Error fetching product data:', error);
       }
     };
 
@@ -58,9 +58,9 @@ export default defineComponent({
 
     const product = ref<ProductData>({
       id: 0,
-      name: "",
-      price: "",
-      url: "",
+      name: '',
+      price: '',
+      url: '',
     });
 
     (async () => {

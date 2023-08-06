@@ -51,12 +51,12 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const api = `https://twin-api.onrender.com/api`;
+    const api = process.env.API;
     const getProduct = async (): Promise<ProductData[]> => {
       try {
         const response = await fetch(`${api}/product/list/15/${props.page ? ((props.page - 1) * 15) : ''}`, {
           headers: {
-            "Authorization": `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
         });
 
