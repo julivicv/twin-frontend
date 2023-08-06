@@ -33,17 +33,20 @@
                 <q-item clickable>
                   <q-item-section>Suas Lojas</q-item-section>
                 </q-item>
+              </q-list>
+            </q-menu>
+          </q-avatar>
 
-                <div class="tw-flex tw-p-3 tw-bg-slate-50 tw-justify-between tw-text-black">
-                  <nav class="tw-flex tw-gap-4">
-                    <router-link to="/">PÁGINA INICIAL</router-link>
-                    <router-link to="/">CATEGORIAS</router-link>
-                    <router-link to="/">PRODUTOS</router-link>
-                    <router-link to="/">LOJAS</router-link>
-                    <router-link to="/">CONTATO</router-link>
-                  </nav>
-                  <a href="">CRIE SEU E-COMERCE</a>
-                </div>
+          <div class="tw-flex tw-p-3 tw-bg-slate-50 tw-justify-between tw-text-black">
+            <nav class="tw-flex tw-gap-4">
+              <router-link to="/">PÁGINA INICIAL</router-link>
+              <router-link to="/">CATEGORIAS</router-link>
+              <router-link to="/">PRODUTOS</router-link>
+              <router-link to="/">LOJAS</router-link>
+              <router-link to="/">CONTATO</router-link>
+            </nav>
+            <a href="">CRIE SEU E-COMERCE</a>
+          </div>
       </q-header>
 
       <q-drawer v-model="leftDrawerOpen" :width="300" :breakpoint="700" elevated class="bg-white text-black">
