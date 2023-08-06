@@ -3,7 +3,7 @@
     <q-layout view="hHh Lpr lff">
       <q-header elevated>
         <q-toolbar elevated class="$tw-gap-[16px]'">
-          <img class="tw-w-20" src="../assets/twinny.png" />
+          <img class="tw-w-14" src="../assets/twinny.png" />
 
           <q-space />
 
@@ -30,6 +30,7 @@
                 <q-item clickable>
                   <q-item-section v-on:click="leave">Sair</q-item-section>
                 </q-item>
+<<<<<<< HEAD
               </q-list>
             </q-menu>
           </q-avatar>
@@ -45,6 +46,22 @@
           </nav>
           <a href="">CRIE SEU E-COMERCE</a>
         </div>
+=======
+                <q-item clickable>
+                  <q-item-section>Suas Lojas</q-item-section>
+                </q-item>
+
+                <div class="tw-flex tw-p-3 tw-bg-slate-50 tw-justify-between tw-text-black">
+                  <nav class="tw-flex tw-gap-4">
+                    <router-link to="/">PÁGINA INICIAL</router-link>
+                    <router-link to="/">CATEGORIAS</router-link>
+                    <router-link to="/">PRODUTOS</router-link>
+                    <router-link to="/">LOJAS</router-link>
+                    <router-link to="/">CONTATO</router-link>
+                  </nav>
+                  <a href="">CRIE SEU E-COMERCE</a>
+                </div>
+>>>>>>> 4748f33b7ada57bf57ca6ec780b46b6228f8b276
       </q-header>
 
       <q-drawer v-model="leftDrawerOpen" :width="300" :breakpoint="700" elevated class="bg-white text-black">
