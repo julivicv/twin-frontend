@@ -41,7 +41,7 @@
             <router-link to="/">CATEGORIAS</router-link>
             <router-link to="/">PRODUTOS</router-link>
             <router-link to="/">LOJAS</router-link>
-            <router-link to="/">CONTATO</router-link>
+            <router-link to="/contato">CONTATO</router-link>
           </nav>
           <a href="">CRIE SEU E-COMERCE</a>
         </div>
@@ -72,7 +72,6 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import EssentialLink from '../components/EssentialLink.vue';
 
 export default defineComponent({
   name: 'HeaderLayout',
