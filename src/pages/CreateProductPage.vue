@@ -62,7 +62,7 @@
         v-model="selectedFile"
         label="Image"
         counter
-        ref="selectedFile"
+        ref="fileInput"
         @change="onFileSelected"
       >
         <template v-slot:prepend>

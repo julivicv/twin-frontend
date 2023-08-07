@@ -39,7 +39,8 @@
             v-if="!isAuthenticated"
             to="/cadastro"
             class="hover:tw-underline"
-            >Cadastro</router-link>
+            >Cadastro</router-link
+          >
 
           <div v-if="isAuthenticated" class="text-weight-bold">
             Olá, {{ user.name }}

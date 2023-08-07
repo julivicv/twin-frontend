@@ -87,7 +87,7 @@ export default defineComponent({
     const meta = ref({
       totalCount: 1200,
     });
-    const api = 'https://twin-api.onrender.com/api';
+    const api = process.env.API;
 
     const getShop = async () => {
       try {
