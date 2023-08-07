@@ -1,18 +1,60 @@
 <template>
-  <q-page :key="$route.fullPath">
-    <h1>{{ product.name }}</h1>
-    <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" :src="'https://twin-api.onrender.com' + product.url" />
-    <p>
-      {{ product.price }}
-    </p>
+  <q-page
+    :key="$route.fullPath"
+    class="tw-bg-black tw-text-white tw-border-white tw-p-10"
+  >
+    <div class="tw-grid tw-grid-cols-2 tw-gap-10 tw-w-fit tw-m-auto tw-my-10">
+      <div class="">
+        <q-img
+          class="tw-w-[250px] tw-h-[250px] tw-rounded-lg"
+          :src="'https://twin-api.onrender.com' + product.url"
+        />
+      </div>
 
-    <q-btn label="Add to cart" color="primary" class="q-mt-md" @click="() => alert('Not implemented')" />
+      <div class="">
+        <h1 class="tw-text-3xl">{{ product.name }}</h1>
+        <p class="tw-text-1xl">{{ product.description }}</p>
+        <p>R${{ product.price }}</p>
+        <p>Quantidade em stoque: {{ product.quantity }}</p>
 
-    <q-btn label="Buy now" color="primary" class="q-mt-md" @click="() => alert('Not implemented')" />
+        <q-btn
+          label="Add to cart"
+          color="primary"
+          class="q-mt-md"
+          @click="() => alert('Not implemented')"
+        />
 
-    <q-btn label="Go back" color="primary" class="q-mt-md" @click="() => $router.go(-1)" />
-
-
+        <q-btn
+          label="Buy now"
+          color="primary"
+          class="q-mt-md"
+          @click="() => alert('Not implemented')"
+        />
+      </div>
+    </div>
+    <h2 class="tw-text-2xl tw-text-center tw-m-10">Comentarios</h2>
+    <div class="tw-flex tw-w-fit tw-m-auto tw-gap-2 tw-my-25">
+      <q-input
+        class="tw-w-fit"
+        :dark="true"
+        v-model="comment"
+        label="Deixe seu comentario"
+      />
+      <q-btn color="white" text-color="black" label="Adicionar" />
+    </div>
+    <div class="tw-grid tw-grid-cols-4 tw-gap-4 tw-p-4">
+      <q-card
+        v-for="p in commentref"
+        :key="p.id"
+        class="tw-border tw-bg-[#111] tw-p-4"
+        rounded
+      >
+        <h4 class="tw-border-b tw-mb-2">{{ p.name }}</h4>
+        <p>
+          {{ p.comment }}
+        </p>
+      </q-card>
+    </div>
   </q-page>
 </template>
 
@@ -25,16 +67,16 @@ export default defineComponent({
 
   setup() {
     const route = useRoute();
-
-    const page = route.params.id
+    const comment = ref(null);
+    const page = route.params.id;
     const api = process.env.API;
 
     const getProductData = async () => {
       try {
         const response = await fetch(api + `/product/${page}`, {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
         });
 
         if (response.status !== 200) {
@@ -43,7 +85,15 @@ export default defineComponent({
         }
 
         const data = await response.json();
+        const comentario = data.product.comments.map((e: any, i: number) => {
+          return {
+            id: i,
+            comment: e.comment,
+            name: e.account.name,
+          };
+        });
         product.value = data.product;
+        commentref.value = comentario;
       } catch (error) {
         console.error('Error fetching product data:', error);
       }
@@ -53,6 +103,9 @@ export default defineComponent({
       id: number;
       name: string;
       price: string;
+      description: string;
+      quantity: number;
+      coin_type: string;
       url: string;
     };
 
@@ -60,8 +113,21 @@ export default defineComponent({
       id: 0,
       name: '',
       price: '',
+      coin_type: '',
+      description: '',
+      quantity: 0,
       url: '',
     });
+
+    type Comment = {
+      id: number;
+      comment: string;
+      name: string;
+    };
+
+    const commentref = ref<Comment[]>([]);
+
+    console.log(commentref);
 
     (async () => {
       await getProductData();
@@ -71,9 +137,9 @@ export default defineComponent({
     return {
       page,
       product,
+      commentref,
+      comment,
     };
   },
-
 });
-
 </script>

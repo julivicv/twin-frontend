@@ -38,7 +38,6 @@ const routes: RouteRecordRaw[] = [
       { path: '', component: () => import('src/pages/ContatoPage.vue') },
     ],
   },
-  
 
   {
     path: '/confirmEmail',
@@ -70,6 +69,19 @@ const routes: RouteRecordRaw[] = [
       { path: '', component: () => import('src/pages/ProductPage.vue') },
     ],
   },
+  {
+    path: '/shop/:id',
+    component: () => import('layouts/HeaderLayout.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/StorePage.vue') },
+    ],
+  },
+  {
+    path: '/carrinho',
+    component: () => import('layouts/HeaderLayout.vue'),
+    children: [{ path: '', component: () => import('src/pages/CartPage.vue') }],
+  },
+
   {
     path: '/:catchAll(.*)*',
     component: () => import('pages/ErrorNotFound.vue'),

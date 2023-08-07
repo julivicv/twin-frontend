@@ -97,8 +97,6 @@ export default {
     const email = ref(null);
     const message = ref(null);
 
-    $q.dark.set(true);
-
     return {
       isLoading,
       name,
