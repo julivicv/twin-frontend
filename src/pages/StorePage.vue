@@ -8,7 +8,7 @@
       <q-card :dark="true" @click="redirectToProductPage(p.id)" v-for="p in productref" :key="p.id"
         class="product-card tw-rounded-lg tw-transform tw-transition tw-duration-500 hover:tw-scale-[103%] hover:tw-bg-zinc-900"
         rounded>
-        <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" :src="'http://localhost:8080' + p.url" />
+        <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" :src="'https://twin-api.onrender.com/' + p.url" />
 
         <q-card-section class="q-py-none tw-py-[7px]">
           <div class="tw-w-0 tw-h-0">

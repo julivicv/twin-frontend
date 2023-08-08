@@ -2,7 +2,7 @@
   <q-page :key="$route.fullPath" class="tw-bg-black tw-text-white tw-border-white tw-p-10">
     <div class="tw-grid tw-grid-cols-2 tw-gap-10 tw-w-fit tw-m-auto tw-my-10">
       <div class="">
-        <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" :src="'http://localhost:8080' + product.url" />
+        <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" :src="'https://twin-api.onrender.com/' + product.url" />
       </div>
 
       <div class="">
