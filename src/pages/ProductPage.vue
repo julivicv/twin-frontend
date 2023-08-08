@@ -1,14 +1,8 @@
 <template>
-  <q-page
-    :key="$route.fullPath"
-    class="tw-bg-black tw-text-white tw-border-white tw-p-10"
-  >
+  <q-page :key="$route.fullPath" class="tw-bg-black tw-text-white tw-border-white tw-p-10">
     <div class="tw-grid tw-grid-cols-2 tw-gap-10 tw-w-fit tw-m-auto tw-my-10">
       <div class="">
-        <q-img
-          class="tw-w-[250px] tw-h-[250px] tw-rounded-lg"
-          :src="'https://twin-api.onrender.com' + product.url"
-        />
+        <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" :src="'http://localhost:8080' + product.url" />
       </div>
 
       <div class="">
@@ -17,38 +11,18 @@
         <p>R${{ product.price }}</p>
         <p>Quantidade em stoque: {{ product.quantity }}</p>
 
-        <q-btn
-          label="Add to cart"
-          color="primary"
-          class="q-mt-md"
-          @click="() => alert('Not implemented')"
-        />
+        <q-btn label="Add to cart" color="primary" class="q-mt-md" @click="() => alert('Not implemented')" />
 
-        <q-btn
-          label="Buy now"
-          color="primary"
-          class="q-mt-md"
-          @click="() => alert('Not implemented')"
-        />
+        <q-btn label="Buy now" color="primary" class="q-mt-md" @click="() => alert('Not implemented')" />
       </div>
     </div>
     <h2 class="tw-text-2xl tw-text-center tw-m-10">Comentarios</h2>
     <div class="tw-flex tw-w-fit tw-m-auto tw-gap-2 tw-my-25">
-      <q-input
-        class="tw-w-fit"
-        :dark="true"
-        v-model="comment"
-        label="Deixe seu comentario"
-      />
+      <q-input class="tw-w-fit" :dark="true" v-model="comment" label="Deixe seu comentario" />
       <q-btn color="white" text-color="black" label="Adicionar" />
     </div>
     <div class="tw-grid tw-grid-cols-4 tw-gap-4 tw-p-4">
-      <q-card
-        v-for="p in commentref"
-        :key="p.id"
-        class="tw-border tw-bg-[#111] tw-p-4"
-        rounded
-      >
+      <q-card v-for="p in commentref" :key="p.id" class="tw-border tw-bg-[#111] tw-p-4" rounded>
         <h4 class="tw-border-b tw-mb-2">{{ p.name }}</h4>
         <p>
           {{ p.comment }}

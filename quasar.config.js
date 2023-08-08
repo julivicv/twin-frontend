@@ -63,7 +63,7 @@ module.exports = configure(function (/* ctx */) {
       // publicPath: '/',
       // analyze: true,
       env: {
-        API: 'https://twin-api.onrender.com/api',
+        API: 'http://localhost:8080/api',
       },
       // rawDefine: {}
       // ignorePublicFolder: true,

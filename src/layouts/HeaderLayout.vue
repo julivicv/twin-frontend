@@ -7,40 +7,18 @@
 
           <q-space />
 
-          <q-input
-            dark
-            dense
-            standout
-            v-model="text"
-            input-class="text-left"
-            class="q-ml-lg q-mr-lg search"
-          >
+          <q-input dark dense standout v-model="text" input-class="text-left" class="q-ml-lg q-mr-lg search">
             <template v-slot:append>
               <q-icon v-if="text === ''" name="search" />
-              <q-icon
-                v-else
-                name="clear"
-                class="cursor-pointer"
-                @click="text = ''"
-              />
+              <q-icon v-else name="clear" class="cursor-pointer" @click="text = ''" />
             </template>
           </q-input>
 
           <q-space />
 
-          <router-link
-            v-if="!isAuthenticated"
-            to="/login"
-            class="hover:tw-underline"
-            >Login</router-link
-          >
+          <router-link v-if="!isAuthenticated" to="/login" class="hover:tw-underline">Login</router-link>
 
-          <router-link
-            v-if="!isAuthenticated"
-            to="/cadastro"
-            class="hover:tw-underline"
-            >Cadastro</router-link
-          >
+          <router-link v-if="!isAuthenticated" to="/cadastro" class="hover:tw-underline">Cadastro</router-link>
 
           <div v-if="isAuthenticated" class="text-weight-bold">
             Olá, {{ user.name }}
@@ -63,19 +41,13 @@
             <q-icon name="shopping_cart" size="md" class="q-mr-lg"></q-icon>
           </router-link>
         </q-toolbar>
-        <div
-          class="tw-flex tw-p-2 tw-bg-slate-50 tw-justify-between tw-text-black"
-        >
+        <div class="tw-flex tw-p-2 tw-bg-slate-50 tw-justify-between tw-text-black">
           <nav class="tw-flex tw-gap-4">
             <router-link class="menu-text" to="/">PÁGINA INICIAL</router-link>
-            <router-link class="menu-text" to="/">CATEGORIAS</router-link>
-            <router-link class="menu-text" to="/">PRODUTOS</router-link>
-            <router-link class="menu-text" to="/">LOJAS</router-link>
-            <router-link class="menu-text" to="/contato">CONTATO</router-link>
+            <router-link class="menu-text" to="/createShop">CRIAR LOJAS</router-link>
+            <router-link class="menu-text" to="/createProduct">CRIAR PRODUTOS</router-link>
           </nav>
-          <router-link class="menu-text" to="/createShop"
-            >CRIE SEU E-COMERCE</router-link
-          >
+          <router-link class="menu-text" to="/createShop">CRIE SEU E-COMERCE</router-link>
         </div>
       </q-header>
 
@@ -109,8 +81,8 @@ export default defineComponent({
       login() {
         isAuthenticated.value
           ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            //@ts-ignore
-            this.$router.push('/login')
+          //@ts-ignore
+          this.$router.push('/login')
           : (isAuthenticated.value = true);
       },
     };

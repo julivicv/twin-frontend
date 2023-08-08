@@ -91,7 +91,7 @@ export default defineComponent({
 
     const getShop = async () => {
       try {
-        const response = await fetch(`${api}/shop/list/10/0`, {
+        const response = await fetch(`${api}/shop/list/100/0`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
