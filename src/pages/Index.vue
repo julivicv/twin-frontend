@@ -1,6 +1,6 @@
 <template>
   <q-page :key="$route.fullPath">
-    <div class="tw-bg-black tw-p-5 tw-text-white tw-w-full tw-min-h-screen">
+    <div class="tw-bg-[#121212] tw-p-5 tw-text-white tw-w-full tw-min-h-screen">
       <div class="header tw-flex tw-m-5 tw-bg-[#D95D39] tw-p-10 tw-text-5xl tw-font-bold">
         <div class="">
           <h1>SEU IMPÉRIO VIRTUAL COMEÇA AGORA</h1>
@@ -8,7 +8,7 @@
         </div>
         <img class="tw-w-[50%]" src="../assets/desenho.svg" alt="" srcset="">
       </div>
-      <div class="tw-rounded tw-bg-slate-50 tw-text-black tw-flex tw-justify-around tw-p-5 tw-m-5">
+      <div class="tw-rounded tw-bg-slate-50 tw-text-[#121212] tw-flex tw-justify-around tw-p-5 tw-m-5">
         <div class="tw-p-5">
           <h2 class="tw-text-2xl tw-text-[#D95D39] tw-font-bold">Totalmente gratuito</h2>
           <p class="tw-text-gray-400">Crie seu site no twin sem nenhum custo.</p>

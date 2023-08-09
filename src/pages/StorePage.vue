@@ -1,5 +1,5 @@
 <template>
-  <q-page :key="$route.fullPath" class="tw-bg-black tw-text-white tw-border-white tw-p-10">
+  <q-page :key="$route.fullPath" class="tw-bg-[#121212] tw-text-white tw-border-white tw-p-10">
     <h1 class="tw-text-4xl tw-text-center">Loja - {{ shop.title }}</h1>
     <p class="tw-text-center tw-m-4 tw-text-1xl">{{ shop.description }}</p>
     <p class="tw-text-justify">{{ shop.content }}</p>

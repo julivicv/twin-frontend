@@ -1,14 +1,12 @@
 <template>
   <div class="q-pa-md">
-    <h1 class="tw-text-2xl  tw-m-4 tw-text-center">Cadastre sua Loja</h1>
-    <q-form class="tw-w-[50%] tw-m-auto tw-flex tw-flex-col tw-gap-2" :dark="true" @submit="onSubmit" color="primary"
-      animated>
-      <q-input outlined :dark="true" v-model="title" label="Titulo" />
-      <br />
-      <q-input outlined :dark="true" v-model="description" label="Breve descrição" />
-      <br />
-      <q-input outlined :dark="true" v-model="content" type="textarea" label="Conteudo da pagina" />
-      <q-btn color="primary" label="Create" type="submit" />
+    <h1 class="tw-text-2xl tw-text-white tw-m-3 tw-text-center">Cadastre sua Loja</h1>
+    <q-form class="tw-grid tw-grid-cols-2 tw-w-[50%] tw-m-auto tw-gap-5 tw-my-10" :dark="true" @submit="onSubmit"
+      color="primary" animated>
+      <q-input rounded :dark="true" v-model="title" label="Titulo" class="tw-col-span-1" />
+      <q-input rounded :dark="true" v-model="description" label="Breve descrição" class="tw-col-span-1" />
+      <q-input rounded :dark="true" v-model="content" type="textarea" class="tw-col-span-2" label="Conteudo da pagina" />
+      <q-btn color="primary" class="tw-col-span-2" label="Create" type="submit" />
     </q-form>
   </div>
 </template>

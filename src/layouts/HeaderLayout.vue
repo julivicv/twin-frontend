@@ -3,8 +3,9 @@
     <q-layout view="hHh Lpr lff">
       <q-header elevated>
         <q-toolbar elevated class="$tw-gap-[16px]'">
-          <img class="tw-w-14" src="../assets/twinny.png" />
-
+          <a href="./">
+            <img class="tw-w-14" src="../assets/twinny.png" />
+          </a>
           <q-space />
 
           <q-input dark dense standout v-model="text" input-class="text-left" class="q-ml-lg q-mr-lg search">
@@ -19,29 +20,32 @@
           <router-link v-if="!isAuthenticated" to="/login" class="hover:tw-underline">Login</router-link>
 
           <router-link v-if="!isAuthenticated" to="/cadastro" class="hover:tw-underline">Cadastro</router-link>
+          <div class="tw-flex tw-items-center tw-gap-5">
+            <div v-if="isAuthenticated" class="text-weight-bold">
+              Olá, {{ user.name }}
+            </div>
+            <div v-else class="text-weight-bold">Olá, logue-se</div>
+            <q-avatar v-if="isAuthenticated" class="q-mr-sm">
+              <img :src="user.img" />
+              <q-menu fit>
+                <q-list style="min-width: 100px">
+                  <q-item clickable>
+                    <q-item-section v-on:click="leave">Sair</q-item-section>
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section v-on:click="loja">Suas Lojas</q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-avatar>
 
-          <div v-if="isAuthenticated" class="text-weight-bold">
-            Olá, {{ user.name }}
+            <router-link to="/carrinho">
+              <q-icon name="shopping_cart" size="md" class="q-mr-lg"></q-icon>
+            </router-link>
           </div>
-          <div v-else class="text-weight-bold">Olá, logue-se</div>
-          <q-avatar v-if="isAuthenticated" class="q-mr-sm">
-            <img :src="user.img" />
-            <q-menu fit>
-              <q-list style="min-width: 100px">
-                <q-item clickable>
-                  <q-item-section v-on:click="leave">Sair</q-item-section>
-                </q-item>
-                <q-item clickable>
-                  <q-item-section>Suas Lojas</q-item-section>
-                </q-item>
-              </q-list>
-            </q-menu>
-          </q-avatar>
-          <router-link to="/carrinho">
-            <q-icon name="shopping_cart" size="md" class="q-mr-lg"></q-icon>
-          </router-link>
         </q-toolbar>
-        <div class="tw-flex tw-p-2 tw-bg-slate-50 tw-justify-between tw-text-black">
+
+        <div class="tw-flex tw-p-2 tw-bg-slate-50 tw-justify-between tw-text-[#121212]">
           <nav class="tw-flex tw-gap-4">
             <router-link class="menu-text" to="/">PÁGINA INICIAL</router-link>
             <router-link class="menu-text" to="/createShop">CRIAR LOJAS</router-link>
@@ -70,7 +74,7 @@ export default defineComponent({
     const user = {
       name: localStorage.getItem('name') || 'Korra',
       email: localStorage.getItem('email') || '',
-      img: 'https://i.pinimg.com/originals/c5/01/79/c50179d3ea995d618a7bd0cd0e1e1b89.jpg',
+      img: "https://www.promoview.com.br/uploads/images/unnamed%2819%29.png",
     };
     const isAuthenticated = ref(localStorage.getItem('token') !== null);
 
@@ -89,6 +93,9 @@ export default defineComponent({
   },
 
   methods: {
+    loja() {
+      this.$router.push('/shops');
+    },
     leave() {
       localStorage.clear();
       this.isAuthenticated = false;
@@ -108,7 +115,7 @@ export default defineComponent({
 }
 
 .butao {
-  background-color: black;
+  background-color: #121212;
   color: white;
 }
 
