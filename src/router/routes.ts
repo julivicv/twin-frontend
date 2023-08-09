@@ -46,6 +46,7 @@ const routes: RouteRecordRaw[] = [
     ],
   },
 
+
   {
     path: '/confirmEmail',
     component: () => import('layouts/MainLayout.vue'),
