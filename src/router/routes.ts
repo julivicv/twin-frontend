@@ -22,6 +22,13 @@ const routes: RouteRecordRaw[] = [
       { path: '', component: () => import('src/pages/CreateProductPage.vue') },
     ],
   },
+  {
+    path: '/shops',
+    component: () => import('layouts/HeaderLayout.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/Shops.vue') },
+    ],
+  },
 
   {
     path: '/createShop',
@@ -38,6 +45,7 @@ const routes: RouteRecordRaw[] = [
       { path: '', component: () => import('src/pages/ContatoPage.vue') },
     ],
   },
+
 
   {
     path: '/confirmEmail',

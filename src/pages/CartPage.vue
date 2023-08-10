@@ -1,8 +1,6 @@
 <template>
-  <q-page
-    class="cart-page row items-center justify-evenly tw-overflow-hidden tw-text-white"
-  >
-    <div class="tw-w-[70%] tw-h-[100%] tw-flex tw-col tw-p-[50px]">
+  <q-page class="cart-page row items-center justify-evenly tw-overflow-hidden tw-text-white">
+    <div class="tw-w-[70%] tw-h-[100%]">
       <h1 class="cart-title">MEU CARRINHO</h1>
     </div>
     <div class="tw-w-[30%] tw-h-[100%]"></div>
@@ -22,8 +20,9 @@ export default defineComponent({
 
 <style lang="scss">
 .cart-page {
-  background-color: black;
+  background-color: #121212;
 }
+
 .cart-title {
   font-family: 'Oswald', sans-serif;
   font-size: 30pt;
