@@ -101,7 +101,7 @@ export default {
       model: ref(null),
 
       onSubmit() {
-        // const { label } = shop.value;
+         const { value } = shop.value;
         const formData = new FormData();
 
         formData.append('image', selectedFile.value);
@@ -111,7 +111,7 @@ export default {
           price: price.value,
           quantity: quantity.value,
           coin_type: coin_type.value,
-          shop: shop.value,
+          shop: value,
         };
 
 

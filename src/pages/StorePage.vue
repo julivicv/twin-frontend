@@ -3,12 +3,13 @@
     <h1 class="tw-text-4xl tw-text-center">Loja - {{ shop.title }}</h1>
     <p class="tw-text-center tw-m-4 tw-text-1xl">{{ shop.description }}</p>
     <p class="tw-text-justify">{{ shop.content }}</p>
+    <h3 class="tw-text-4xl tw-text-center">Produtos</h3>
     <div
       class="tw-grid tw-grid-flow-column xl:tw-grid-cols-5 lg:tw-grid-cols-4 md:tw-grid-cols-2 tw-row-auto tw-gap-4 tw-m-auto">
       <q-card :dark="true" @click="redirectToProductPage(p.id)" v-for="p in productref" :key="p.id"
         class="product-card tw-rounded-lg tw-transform tw-transition tw-duration-500 hover:tw-scale-[103%] hover:tw-bg-zinc-900"
         rounded>
-        <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" :src="'https://twin-api.onrender.com/' + p.url" />
+        <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" :src="'https://twin-api.onrender.com' + p.url" />
 
         <q-card-section class="q-py-none tw-py-[7px]">
           <div class="tw-w-0 tw-h-0">

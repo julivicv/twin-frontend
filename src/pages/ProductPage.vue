@@ -1,8 +1,14 @@
 <template>
-  <q-page :key="$route.fullPath" class="tw-bg-[#121212] tw-text-white tw-border-white tw-p-10">
+  <q-page
+    :key="$route.fullPath"
+    class="tw-bg-[#121212] tw-text-white tw-border-white tw-p-10"
+  >
     <div class="tw-grid tw-grid-cols-2 tw-gap-10 tw-w-fit tw-m-auto tw-my-10">
       <div class="">
-        <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" :src="'https://twin-api.onrender.com/' + product.url" />
+        <q-img
+          class="tw-w-[250px] tw-h-[250px] tw-rounded-lg"
+          :src="'https://twin-api.onrender.com' + product.url"
+        />
       </div>
 
       <div class="">
@@ -11,18 +17,39 @@
         <p>R${{ product.price }}</p>
         <p>Quantidade em stoque: {{ product.quantity }}</p>
 
-        <q-btn label="Add to cart" color="primary" class="q-mt-md" @click="() => alert('Not implemented')" />
-
-        <q-btn label="Buy now" color="primary" class="q-mt-md" @click="() => alert('Not implemented')" />
+        <q-btn
+          label="Add to cart"
+          color="primary"
+          class="q-mt-md"
+          @click="() => alert('Not implemented')"
+        />
       </div>
     </div>
     <h2 class="tw-text-2xl tw-text-center tw-m-10">Comentarios</h2>
     <div class="tw-flex tw-w-fit tw-m-auto tw-gap-2 tw-my-25">
-      <q-input class="tw-w-fit" :dark="true" v-model="comment" label="Deixe seu comentario" />
-      <q-btn color="white" text-color="#121212" label="Adicionar" />
+      <q-form @submit="onSubmit" class="q-gutter-md login-form tw-flex tw-mb-10">
+        <q-input
+          class="tw-w-fit"
+          :dark="true"
+          standout=""
+          v-model="comment"
+          label="Deixe seu comentario"
+        />
+        <q-btn
+          color="red"
+          text-color="#121212"
+          type="submit"
+          label="Adicionar"
+        />
+      </q-form>
     </div>
     <div class="tw-grid tw-grid-cols-4 tw-gap-4 tw-p-4">
-      <q-card v-for="p in commentref" :key="p.id" class="tw-border tw-bg-[#111] tw-p-4" rounded>
+      <q-card
+        v-for="p in commentref"
+        :key="p.id"
+        class="tw-border tw-bg-[#111] tw-p-4"
+        rounded
+      >
         <h4 class="tw-border-b tw-mb-2">{{ p.name }}</h4>
         <p>
           {{ p.comment }}
@@ -33,6 +60,7 @@
 </template>
 
 <script lang="ts">
+import { useQuasar } from 'quasar';
 import { defineComponent, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -44,6 +72,9 @@ export default defineComponent({
     const comment = ref(null);
     const page = route.params.id;
     const api = process.env.API;
+
+    const $q = useQuasar();
+    const isLoading = ref(false);
 
     const getProductData = async () => {
       try {
@@ -113,6 +144,53 @@ export default defineComponent({
       product,
       commentref,
       comment,
+
+      onSubmit() {
+        const data = {
+          content: comment.value,
+        };
+        console.log(data);
+
+        function commentSubmit(body: any) {
+          const options = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+
+            body: JSON.stringify(body),
+          };
+          const api = process.env.API;
+          return fetch(`${api}/comment/${page}`, options).then((T) => T.json());
+        }
+
+        commentSubmit(data)
+          .then((response) => {
+            if (response.error) {
+              throw new Error(response.message);
+            }
+            $q.notify({
+              color: 'green-5',
+              textColor: 'white',
+              icon: 'success',
+              message: 'Comentário adicionado com sucesso!',
+              position: 'top-right',
+            });
+          })
+          .catch((error) => {
+            $q.notify({
+              color: 'red-5',
+              textColor: 'white',
+              icon: 'error',
+              message: error.message,
+              position: 'top-right',
+            });
+          })
+          .finally(() => {
+            isLoading.value = false;
+          });
+      },
     };
   },
 });

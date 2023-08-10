@@ -4,7 +4,7 @@
     <q-card @click="redirectToProductPage(p.id)" v-for="p in productsData" :key="p.id"
       class="product-card tw-rounded-lg tw-transform tw-transition tw-duration-500 hover:tw-scale-[103%] hover:tw-bg-zinc-900"
       rounded>
-      <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" :src="'https://twin-api.onrender.com/' + p.image" />
+      <q-img class="tw-w-[250px] tw-h-[250px] tw-rounded-lg" :src="'https://twin-api.onrender.com' + p.image" />
 
       <q-card-section class="q-py-none tw-py-[7px]">
         <div class="tw-w-0 tw-h-0">
