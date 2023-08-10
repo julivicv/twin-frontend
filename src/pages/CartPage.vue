@@ -2,7 +2,7 @@
   <q-page
     class="cart-page row items-center justify-evenly tw-overflow-hidden tw-text-white"
   >
-    <div class="tw-w-[70%] tw-h-[100%]">
+    <div class="tw-w-[70%] tw-h-[100%] tw-flex tw-col tw-p-[50px]">
       <h1 class="cart-title">MEU CARRINHO</h1>
     </div>
     <div class="tw-w-[30%] tw-h-[100%]"></div>
@@ -14,6 +14,9 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'CartPage',
+  beforeMount() {
+    a;
+  },
 });
 </script>
 
@@ -23,5 +26,7 @@ export default defineComponent({
 }
 .cart-title {
   font-family: 'Oswald', sans-serif;
+  font-size: 30pt;
+  text-align: center;
 }
 </style>
