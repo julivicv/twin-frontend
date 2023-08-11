@@ -30,6 +30,9 @@
               <q-menu fit>
                 <q-list style="min-width: 100px">
                   <q-item clickable>
+                    <q-item-section v-on:click="perfil">Perfil</q-item-section>
+                  </q-item>
+                  <q-item clickable>
                     <q-item-section v-on:click="leave">Sair</q-item-section>
                   </q-item>
                   <q-item clickable>
@@ -74,7 +77,7 @@ export default defineComponent({
     const user = {
       name: localStorage.getItem('name') || 'Korra',
       email: localStorage.getItem('email') || '',
-      img: "https://www.promoview.com.br/uploads/images/unnamed%2819%29.png",
+      img: 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png',
     };
     const isAuthenticated = ref(localStorage.getItem('token') !== null);
 

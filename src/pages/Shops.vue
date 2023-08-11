@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <h1 class="tw-text-white tw-text-4xl tw-text-center tw-m-10">SUAS LOJAS</h1>
 
     <div class="tw-grid tw-grid-cols-3 tw-m-10">
