@@ -1,13 +1,24 @@
 <template>
   <div>
-    
     <h1 class="tw-text-white tw-text-4xl tw-text-center tw-m-10">SUAS LOJAS</h1>
 
     <div class="tw-grid tw-grid-cols-3 tw-m-10">
-      <q-card :dark="true" v-for="s in shops" :key="s.id" class="q-mb-md" style="max-width: 400px;">
+      <q-card
+        :dark="true"
+        v-for="s in shops"
+        :key="s.id"
+        class="q-mb-md"
+        style="max-width: 400px"
+      >
         <q-card-section>
-          <q-item-label class="tw-text-2xl tw-text-center tw-text-white" header>{{ s.title }}</q-item-label>
-          <q-item-label class="tw-text-gray-400" caption>{{ s.description }}</q-item-label>
+          <q-item-label
+            class="tw-text-2xl tw-text-center tw-text-white"
+            header
+            >{{ s.title }}</q-item-label
+          >
+          <q-item-label class="tw-text-gray-400" caption>{{
+            s.description
+          }}</q-item-label>
         </q-card-section>
 
         <q-separator />
@@ -17,7 +28,11 @@
         </q-card-actions>
       </q-card>
 
-      <q-btn color="primary" label="Criar nova loja" @click="handleCreatePage()" />
+      <q-btn
+        color="primary"
+        label="Criar nova loja"
+        @click="handleCreatePage()"
+      />
     </div>
   </div>
 </template>
@@ -33,11 +48,10 @@ export default defineComponent({
     },
     handleCreatePage() {
       window.location.href = `#/createShop`;
-    }
+    },
   },
 
   setup() {
-
     const getShops = async () => {
       const options = {
         method: 'GET',
@@ -69,7 +83,6 @@ export default defineComponent({
     return {
       shops,
     };
-
   },
 });
 </script>

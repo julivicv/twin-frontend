@@ -6,7 +6,8 @@
           <p>
             Estamos comprometidos em oferecer suporte contínuo para seu negócio
             online. Nossa equipe está
-            <strong>disponível 24h para atendê-lo. Entre em contato conosco e
+            <strong
+              >disponível 24h para atendê-lo. Entre em contato conosco e
               experimente um serviço de atendimento ao cliente excepcional,
               disponível a qualquer hora.
             </strong>
@@ -16,28 +17,61 @@
           <h1>CONTATE-NOS</h1>
           <q-form @submit="onSubmit">
             <div class="input-content">
-              <q-input outlined v-model="name" label="Nome" lazy-rules type="text" class="form-input">
+              <q-input
+                outlined
+                v-model="name"
+                label="Nome"
+                lazy-rules
+                type="text"
+                class="form-input"
+              >
                 <template v-slot:prepend>
                   <q-icon name="person" />
                 </template>
               </q-input>
-              <q-input standout rounded v-model="email" label="Email" class="form-input" lazy-rules :rules="[
-                (val) =>
-                  (val !== null && val !== '') ||
-                  'Por favor, digite um email para realizar o login',
-                (val) =>
-                  /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi.test(
-                    val
-                  ) || 'Email inválido',
-              ]" type="email">
+              <q-input
+                standout
+                rounded
+                v-model="email"
+                label="Email"
+                class="form-input"
+                lazy-rules
+                :rules="[
+                  (val) =>
+                    (val !== null && val !== '') ||
+                    'Por favor, digite um email para realizar o login',
+                  (val) =>
+                    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi.test(
+                      val
+                    ) || 'Email inválido',
+                ]"
+                type="email"
+              >
               </q-input>
-              <q-input standout rounded v-model="message" label="Sua Mensagem" lazy-rules type="text" class="form-input">
+              <q-input
+                standout
+                rounded
+                v-model="message"
+                label="Sua Mensagem"
+                lazy-rules
+                type="text"
+                class="form-input"
+              >
               </q-input>
 
-              <q-btn v-if="!isLoading" class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto" label="ENVIAR"
-                color="primary" type="submit" />
+              <q-btn
+                v-if="!isLoading"
+                class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
+                label="ENVIAR"
+                color="primary"
+                type="submit"
+              />
 
-              <q-btn v-else class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto" color="primary">
+              <q-btn
+                v-else
+                class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
+                color="primary"
+              >
                 <q-spinner />
               </q-btn>
             </div>

@@ -138,10 +138,11 @@ export default defineComponent({
     const addCartProdutct = (idProduct) => {
       if (localStorage.getItem('cart') === null) {
         const dataCart = [idProduct];
-        localStorage.setItem('cart', JSON.stringify(dataCart));localStorage.setItem('cart', JSON.stringify(dataCart));
+        localStorage.setItem('cart', JSON.stringify(dataCart));
+        localStorage.setItem('cart', JSON.stringify(dataCart));
       } else {
         const dataCart = JSON.parse(localStorage.getItem(`cart`));
-        dataCart.push(idProduct)
+        dataCart.push(idProduct);
         localStorage.setItem('cart', JSON.stringify(dataCart));
       }
     };

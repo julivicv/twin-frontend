@@ -1,13 +1,20 @@
 <template>
   <q-page>
     <div class="confirm-form-container">
-      <div class="flex align-center justify-items-center tw-h-[100vh] justify-center items-center">
+      <div
+        class="flex align-center justify-items-center tw-h-[100vh] justify-center items-center"
+      >
         <div class="tw-flex tw-flex-center tw-flex-col">
-          <h1 class="register-subtitle tw-min-w-full tw-m-10 tw-text-center tw-justify-center">
+          <h1
+            class="register-subtitle tw-min-w-full tw-m-10 tw-text-center tw-justify-center"
+          >
             Um email foi enviado para a ativação de conta. Verifique!
           </h1>
-          <router-link to="/login"
-            class="redirectToLogin tw-text-2xl tw-w-min tw-px-4 tw-rounded tw-py-2 tw-mx-auto hover:tw-underline">Login</router-link>
+          <router-link
+            to="/login"
+            class="redirectToLogin tw-text-2xl tw-w-min tw-px-4 tw-rounded tw-py-2 tw-mx-auto hover:tw-underline"
+            >Login</router-link
+          >
         </div>
       </div>
     </div>

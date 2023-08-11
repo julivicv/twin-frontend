@@ -3,82 +3,153 @@
     <div class="img-container tw-w-[50%] tw-min-h-[100vh]">
       <div class="title-container tw-flex tw-flex-col tw-items-center">
         <h1 class="register-title tw-text-white">TWIN</h1>
-        <span class="register-subtitle tw-text-white">Transforme seu sonho em realidade:
-          <strong> crie seu e-commerce em segundos!</strong></span>
-      </div>
-      <div class="tw-bg-white tw-w-[50%] tw-h-[193px] absolute tw-bottom-[-100px]" ref="bgBubbles"></div>
-      <img class="absolute tw-bottom-[-150px] tw-w-[50%] bubbles" ref="bubbles1" src="../assets/bubbles_bg1.svg" alt="" />
-      <img class="absolute tw-bottom-[-150px] tw-w-[50%] bubbles" ref="bubbles2" src="../assets/bubbles_bg2.svg" alt="" />
-      <div
-        class="bubble1 bubble tw-rounded-full tw-bg-white tw-absolute tw-bottom-[40px] tw-left-[35vw] tw-h-[69px] tw-w-[69px]">
+        <span class="register-subtitle tw-text-white"
+          >Transforme seu sonho em realidade:
+          <strong> crie seu e-commerce em segundos!</strong></span
+        >
       </div>
       <div
-        class="bubble2 bubble tw-rounded-full tw-bg-white tw-absolute tw-bottom-[140px] tw-left-[40vw] tw-h-[51px] tw-w-[51px]">
-      </div>
+        class="tw-bg-white tw-w-[50%] tw-h-[193px] absolute tw-bottom-[-100px]"
+        ref="bgBubbles"
+      ></div>
+      <img
+        class="absolute tw-bottom-[-150px] tw-w-[50%] bubbles"
+        ref="bubbles1"
+        src="../assets/bubbles_bg1.svg"
+        alt=""
+      />
+      <img
+        class="absolute tw-bottom-[-150px] tw-w-[50%] bubbles"
+        ref="bubbles2"
+        src="../assets/bubbles_bg2.svg"
+        alt=""
+      />
       <div
-        class="bubble3 bubble tw-rounded-full tw-bg-white tw-absolute tw-bottom-[140px] tw-left-[3vw] tw-h-[30px] tw-w-[30px]">
-      </div>
+        class="bubble1 bubble tw-rounded-full tw-bg-white tw-absolute tw-bottom-[40px] tw-left-[35vw] tw-h-[69px] tw-w-[69px]"
+      ></div>
       <div
-        class="bubble4 bubble tw-rounded-full tw-bg-white tw-absolute tw-bottom-[140px] tw-left-[9vw] tw-h-[51px] tw-w-[51px]">
-      </div>
+        class="bubble2 bubble tw-rounded-full tw-bg-white tw-absolute tw-bottom-[140px] tw-left-[40vw] tw-h-[51px] tw-w-[51px]"
+      ></div>
+      <div
+        class="bubble3 bubble tw-rounded-full tw-bg-white tw-absolute tw-bottom-[140px] tw-left-[3vw] tw-h-[30px] tw-w-[30px]"
+      ></div>
+      <div
+        class="bubble4 bubble tw-rounded-full tw-bg-white tw-absolute tw-bottom-[140px] tw-left-[9vw] tw-h-[51px] tw-w-[51px]"
+      ></div>
 
       <img ref="twinny" class="twinny" src="../assets/twinny.png" alt="" />
     </div>
     <div
-      class="tw-flex tw-flex-col tw-items-center tw-w-[50%] tw-justify-center form-container tw-z-0 register-form-container self-start">
+      class="tw-flex tw-flex-col tw-items-center tw-w-[50%] tw-justify-center form-container tw-z-0 register-form-container self-start"
+    >
       <span class="register-form-title tw-text-white">CADASTRE-SE</span>
       <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-        <q-input dark standout rounded v-model="nomeUsuario" label="Nome" lazy-rules :rules="[
-          (val) => (val && val.length > 0) || 'Por favor, digite seu nome.',
-        ]">
+        <q-input
+          dark
+          standout
+          rounded
+          v-model="nomeUsuario"
+          label="Nome"
+          lazy-rules
+          :rules="[
+            (val) => (val && val.length > 0) || 'Por favor, digite seu nome.',
+          ]"
+        >
           <template v-slot:prepend>
             <q-icon name="person" />
           </template>
         </q-input>
 
-        <q-input dark standout rounded v-model="email" label="Email" lazy-rules :rules="[
-          (val) =>
-            (val !== null && val !== '') ||
-            'Por favor, digite um email para contato.',
-          (val) =>
-            /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi.test(
-              val
-            ) || 'Email inválido',
-        ]" type="email">
+        <q-input
+          dark
+          standout
+          rounded
+          v-model="email"
+          label="Email"
+          lazy-rules
+          :rules="[
+            (val) =>
+              (val !== null && val !== '') ||
+              'Por favor, digite um email para contato.',
+            (val) =>
+              /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi.test(
+                val
+              ) || 'Email inválido',
+          ]"
+          type="email"
+        >
           <template v-slot:prepend>
             <q-icon name="mail" />
           </template>
         </q-input>
 
-        <q-input dark standout rounded v-model="senha" label="Senha" lazy-rules :rules="[
-          (val) =>
-            (val !== null && val !== '') ||
-            'Por favor, digite uma senha de acesso.',
-          (val) =>
-            (val.toString().length >= 6 && val.toString().length <= 120) ||
-            'Senha inválida ou insuficiente.',
-          (val) =>
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(val) ||
-            'A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula e pelo menos um número.',
-        ]" :type="passwordType">
+        <q-input
+          dark
+          standout
+          rounded
+          v-model="senha"
+          label="Senha"
+          lazy-rules
+          :rules="[
+            (val) =>
+              (val !== null && val !== '') ||
+              'Por favor, digite uma senha de acesso.',
+            (val) =>
+              (val.toString().length >= 6 && val.toString().length <= 120) ||
+              'Senha inválida ou insuficiente.',
+            (val) =>
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(val) ||
+              'A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula e pelo menos um número.',
+          ]"
+          :type="passwordType"
+        >
           <template v-slot:prepend>
-            <q-icon v-if="passwordType === 'password'" class="cursor-pointer" @click="togglePassword" name="lock" />
-            <q-icon v-if="passwordType === 'text'" class="cursor-pointer" @click="togglePassword" name="lock_open" />
+            <q-icon
+              v-if="passwordType === 'password'"
+              class="cursor-pointer"
+              @click="togglePassword"
+              name="lock"
+            />
+            <q-icon
+              v-if="passwordType === 'text'"
+              class="cursor-pointer"
+              @click="togglePassword"
+              name="lock_open"
+            />
           </template>
         </q-input>
 
         <div>
-          <q-btn dark label="Termos e condições" class="tw-rounded-[1.5rem] tw-mx-auto tw-text-white" color="secondary" />
+          <q-btn
+            dark
+            label="Termos e condições"
+            class="tw-rounded-[1.5rem] tw-mx-auto tw-text-white"
+            color="secondary"
+          />
 
-          <q-checkbox v-model="accept" label="Concordo que li e aceito os termos e condições" color="primary"
-            class="tw-text-white" keep-color />
+          <q-checkbox
+            v-model="accept"
+            label="Concordo que li e aceito os termos e condições"
+            color="primary"
+            class="tw-text-white"
+            keep-color
+          />
         </div>
 
         <div>
-          <q-btn v-if="!isLoading" label="Continuar" type="submit"
-            class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto" color="primary" />
+          <q-btn
+            v-if="!isLoading"
+            label="Continuar"
+            type="submit"
+            class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
+            color="primary"
+          />
 
-          <q-btn v-else class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto" color="primary">
+          <q-btn
+            v-else
+            class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
+            color="primary"
+          >
             <q-spinner />
           </q-btn>
         </div>

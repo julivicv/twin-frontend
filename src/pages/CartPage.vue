@@ -98,8 +98,7 @@ export default {
 
     const deleteFromCart = (id) => {
       //adicionar lógica
-      console.log("aa");
-      
+      console.log('aa');
     };
 
     const getCartProducts = async () => {

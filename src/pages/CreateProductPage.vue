@@ -83,12 +83,7 @@
         type="submit"
         class="tw-col-span-2"
       />
-      <q-btn
-        v-else
-        class="tw-col-span-2"
-        rounded
-        color="primary"
-      >
+      <q-btn v-else class="tw-col-span-2" rounded color="primary">
         <q-spinner />
       </q-btn>
     </q-form>

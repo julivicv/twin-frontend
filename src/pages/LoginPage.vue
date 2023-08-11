@@ -4,41 +4,85 @@
       <router-link to="/">
         <img class="absolute-top-left" src="../assets/twinny_left.svg" alt="" />
       </router-link>
-      <div class="tw-flex tw-items-center tw-w-[60%] tw-justify-center form-container login-form-container self-start">
+      <div
+        class="tw-flex tw-items-center tw-w-[60%] tw-justify-center form-container login-form-container self-start"
+      >
         <q-form @submit="onSubmit" class="q-gutter-md login-form tw-w-[40%]">
-          <q-input dark standout rounded v-model="email" label="Email" lazy-rules :rules="[
-            (val) =>
-              (val !== null && val !== '') ||
-              'Por favor, digite um email para realizar o login',
-            (val) =>
-              /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi.test(
-                val
-              ) || 'Email inválido',
-          ]" type="email">
+          <q-input
+            dark
+            standout
+            rounded
+            v-model="email"
+            label="Email"
+            lazy-rules
+            :rules="[
+              (val) =>
+                (val !== null && val !== '') ||
+                'Por favor, digite um email para realizar o login',
+              (val) =>
+                /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi.test(
+                  val
+                ) || 'Email inválido',
+            ]"
+            type="email"
+          >
             <template v-slot:prepend>
               <q-icon name="person" />
             </template>
           </q-input>
 
-          <q-input dark standout rounded v-model="senha" label="Senha" lazy-rules :rules="[
-            (val) =>
-              (val !== null && val !== '') ||
-              'Por favor, digite uma senha de acesso.',
-          ]" :type="passwordType">
+          <q-input
+            dark
+            standout
+            rounded
+            v-model="senha"
+            label="Senha"
+            lazy-rules
+            :rules="[
+              (val) =>
+                (val !== null && val !== '') ||
+                'Por favor, digite uma senha de acesso.',
+            ]"
+            :type="passwordType"
+          >
             <template v-slot:prepend>
-              <q-icon v-if="passwordType === 'password'" class="cursor-pointer" @click="togglePassword" name="lock" />
-              <q-icon v-if="passwordType === 'text'" class="cursor-pointer" @click="togglePassword" name="lock_open" />
+              <q-icon
+                v-if="passwordType === 'password'"
+                class="cursor-pointer"
+                @click="togglePassword"
+                name="lock"
+              />
+              <q-icon
+                v-if="passwordType === 'text'"
+                class="cursor-pointer"
+                @click="togglePassword"
+                name="lock_open"
+              />
             </template>
           </q-input>
 
           <div class="flex">
-            <q-btn v-if="!isLoading" class="tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto" label="Logar" type="submit"
-              color="primary" />
+            <q-btn
+              v-if="!isLoading"
+              class="tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
+              label="Logar"
+              type="submit"
+              color="primary"
+            />
 
-            <q-btn v-if="!isLoading" class="tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto" label="Cadastro" to="/cadastro"
-              color="secondary" />
+            <q-btn
+              v-if="!isLoading"
+              class="tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
+              label="Cadastro"
+              to="/cadastro"
+              color="secondary"
+            />
 
-            <q-btn v-else class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto" color="primary">
+            <q-btn
+              v-else
+              class="submit-button tw-w-[40%] tw-rounded-[1.5rem] tw-mx-auto"
+              color="primary"
+            >
               <q-spinner />
             </q-btn>
           </div>
@@ -49,9 +93,24 @@
           <h1 class="title">Bem Vindo(a)!</h1>
           <span class="subtitle">Faça o login para continuar</span>
         </div>
-        <img ref="top" class="bubbles btop" src="../assets/bubbles_top.svg" alt="" />
-        <img ref="right" class="bubbles bright" src="../assets/bubbles_right.svg" alt="" />
-        <img ref="bottom" class="bubbles bbottom" src="../assets/bubbles_bottom.svg" alt="" />
+        <img
+          ref="top"
+          class="bubbles btop"
+          src="../assets/bubbles_top.svg"
+          alt=""
+        />
+        <img
+          ref="right"
+          class="bubbles bright"
+          src="../assets/bubbles_right.svg"
+          alt=""
+        />
+        <img
+          ref="bottom"
+          class="bubbles bbottom"
+          src="../assets/bubbles_bottom.svg"
+          alt=""
+        />
       </div>
     </q-page>
   </q-layout>
@@ -123,8 +182,8 @@ export default {
     var passwordType = ref('password');
 
     const togglePassword = () =>
-    (passwordType.value =
-      passwordType.value == 'password' ? 'text' : 'password');
+      (passwordType.value =
+        passwordType.value == 'password' ? 'text' : 'password');
 
     return {
       isLoading,
