@@ -1,34 +1,102 @@
 <template>
   <div class="q-pa-md tw-bg-[#121212]">
-    <h1 class="tw-text-2xl tw-text-white tw-m-3 tw-text-center">Cadastre um novo Produto</h1>
-    <q-form @submit="onSubmit" color="primary" animated class="tw-grid tw-grid-cols-2 tw-w-[50%] tw-m-auto tw-gap-5">
+    <h1 class="tw-text-2xl tw-text-white tw-m-3 tw-text-center">
+      Cadastre um novo Produto
+    </h1>
+    <q-form
+      @submit="onSubmit"
+      color="primary"
+      animated
+      class="tw-grid tw-grid-cols-2 tw-w-[50%] tw-m-auto tw-gap-5"
+    >
       <q-input rounded v-model="name" label="Nome" dark class="tw-col-span-2" />
-      <q-input rounded v-model="description" label="Breve descrição" dark class="tw-col-span-2" />
-      <q-input dark rounded v-model="price" label="Preço do produto" type="number" class="tw-col-span-1" />
-      <q-input dark rounded v-model="quantity" label="Quantidade" type="number" class="tw-col-span-1" />
+      <q-input
+        rounded
+        v-model="description"
+        label="Breve descrição"
+        dark
+        class="tw-col-span-2"
+      />
+      <q-input
+        dark
+        rounded
+        v-model="price"
+        label="Preço do produto"
+        type="number"
+        class="tw-col-span-1"
+      />
+      <q-input
+        dark
+        rounded
+        v-model="quantity"
+        label="Quantidade"
+        type="number"
+        class="tw-col-span-1"
+      />
 
-      <q-select dark id="coin_type" :options="options" v-model="coin_type" label="Tipo de Moeda" class="tw-col-span-2" />
+      <q-select
+        dark
+        id="coin_type"
+        :options="options"
+        v-model="coin_type"
+        label="Tipo de Moeda"
+        class="tw-col-span-2"
+      />
 
-      <q-select dark id="shop" :options="shops" v-model="shop" label="Loja" class="tw-col-span-2" />
+      <q-select
+        dark
+        id="shop"
+        :options="shops"
+        v-model="shop"
+        label="Loja"
+        class="tw-col-span-2"
+      />
 
-      <q-file dark bottom-slots v-model="selectedFile" label="Imagem" counter ref="fileInput" id="fileInput"
-        @change="onFileSelected" class="tw-col-span-2">
+      <q-file
+        dark
+        bottom-slots
+        v-model="selectedFile"
+        label="Imagem"
+        counter
+        ref="fileInput"
+        id="fileInput"
+        @change="onFileSelected"
+        class="tw-col-span-2"
+      >
         <template v-slot:prepend>
           <q-icon name="cloud_upload" @click.stop.prevent />
         </template>
         <template v-slot:append>
-          <q-icon name="close" @click.stop.prevent="model = null" class="cursor-pointer" />
+          <q-icon
+            name="close"
+            @click.stop.prevent="model = null"
+            class="cursor-pointer"
+          />
         </template>
       </q-file>
 
-      <q-btn rounded color="primary" label="Criar" type="submit" class="tw-col-span-2" />
+      <q-btn
+        v-if="!isLoading"
+        rounded
+        color="primary"
+        label="Criar"
+        type="submit"
+        class="tw-col-span-2"
+      />
+      <q-btn
+        v-else
+        class="tw-col-span-2"
+        rounded
+        color="primary"
+      >
+        <q-spinner />
+      </q-btn>
     </q-form>
-
-
   </div>
 </template>
 
 <script>
+import { useQuasar } from 'quasar';
 import { ref } from 'vue';
 
 export default {
@@ -41,6 +109,8 @@ export default {
     const selectedFile = ref(null);
     const shop = ref(null);
     const shops = ref([]);
+    const isLoading = ref(false);
+    const $q = useQuasar();
 
     const options = [
       {
@@ -88,6 +158,7 @@ export default {
       });
 
     return {
+      isLoading,
       name,
       description,
       price,
@@ -101,8 +172,9 @@ export default {
       model: ref(null),
 
       onSubmit() {
-         const { value } = shop.value;
+        const { value } = shop.value;
         const formData = new FormData();
+        isLoading.value = true;
 
         formData.append('image', selectedFile.value);
         const data = {
@@ -113,7 +185,6 @@ export default {
           coin_type: coin_type.value,
           shop: value,
         };
-
 
         for (const key in data) {
           formData.append(key, data[key]);
@@ -132,7 +203,17 @@ export default {
         }
         createProduct(data)
           .then((response) => {
-            console.log(response);
+            if (response.message == 'success') {
+              $q.notify({
+                color: 'green-5',
+                textColor: 'white',
+                icon: 'success',
+                message: 'Produto Criado com Sucesso!',
+                position: 'top-right',
+              });
+            }
+
+            location.href = '#';
           })
           .catch((error) => {
             $q.notify({
@@ -142,6 +223,9 @@ export default {
               message: error.message,
               position: 'top-right',
             });
+          })
+          .finally(() => {
+            isLoading.value = false;
           });
       },
     };
