@@ -85,11 +85,7 @@
             >
           </nav>
           <router-link class="menu-text" to="/createShop"
-<<<<<<< HEAD
-            >CRIE SEU E-COMERCE</router-link
-=======
             >CRIE SEU E-COMMERCE</router-link
->>>>>>> 24ab5bed2c08e39200b03c004de9996c6d894753
           >
         </div>
       </q-header>
