@@ -51,7 +51,7 @@
           label="Adicionar"
         />
         <q-btn
-          v-else="!isLoadingComment"
+          v-else
           color="red"
           text-color="#121212"
           type="button"
