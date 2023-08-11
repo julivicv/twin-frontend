@@ -29,7 +29,7 @@
       </q-card>
 
     </div>
-    <q-btn v-if="isYourpageref" @click="redirect()" label="Adicionar produto" color="primary" class="tw-m-auto" />
+    <q-btn v-if="isYourpageref" @click="redirect()" label="Adicionar produto" color="primary" class="tw-m-auto tw-mt-10" />
 
   </q-page>
 </template>
