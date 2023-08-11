@@ -5,12 +5,21 @@
         class="header tw-flex tw-justify-between tw-bg-[#D95D39] mx-0 lg:mx-auto tw-p-5 tw-font-bold h-[10vh]"
       >
         <div class="">
-          <h1 class="tw-leading-[4rem] tw-text-6xl tw-mb-5 tw-sm:text-4xl tw-md:text-5xl tw-lg:text-6xl tw-xl:text-7xl " id="CRewufpi">SEU IMPÉRIO VIRTUAL COMEÇA AGORA</h1>
-          <router-link to="/createShop" class="tw-mt-10 tw-text-2xl tw-bg-[#202C59] tw-p-2 tw-ml-1">Crie um E-commerce</router-link>
+          <h1
+            class="tw-leading-[4rem] tw-text-6xl tw-mb-5 tw-sm:text-4xl tw-md:text-5xl tw-lg:text-6xl tw-xl:text-7xl"
+            id="CRewufpi"
+          >
+            SEU IMPÉRIO VIRTUAL COMEÇA AGORA
+          </h1>
+          <router-link
+            to="/createShop"
+            class="tw-mt-10 tw-text-2xl tw-bg-[#202C59] tw-p-2 tw-ml-1"
+            >Crie um E-commerce</router-link
+          >
         </div>
         <div class="tw-max-w-[20%] tw-ml-6">
           <img
-            class="tw-max-h-[100%] "
+            class="tw-max-h-[100%]"
             src="../assets/imgIndex.png"
             alt=""
             srcset=""

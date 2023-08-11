@@ -76,12 +76,16 @@ interface ProductData {
 
 export default {
   methods: {
-    changeQtd (id: number, event: any) {
-      const data = JSON.stringify(productsData.value.map((e) => (e.id == id ? {...e , quantity: event.target.value} : e)))
+    changeQtd(id: number, event: any) {
+      const data = JSON.stringify(
+        productsData.value.map((e) =>
+          e.id == id ? { ...e, quantity: event.target.value } : e
+        )
+      );
       console.log(data);
-      
-      localStorage.setItem('cart', data)
-    }
+
+      localStorage.setItem('cart', data);
+    },
   },
   setup() {
     const productsData = ref<ProductData[]>([]);
@@ -107,12 +111,11 @@ export default {
     ];
 
     const deleteFromCart = (id) => {
-      const data = productsData.value.filter((e) => (e.id != id))
+      const data = productsData.value.filter((e) => e.id != id);
       console.log(id);
-      
-      
-      localStorage.setItem('cart', JSON.stringify(data))
-      getCartProducts()
+
+      localStorage.setItem('cart', JSON.stringify(data));
+      getCartProducts();
     };
 
     const getCartProducts = async () => {
@@ -120,36 +123,36 @@ export default {
       //const productsArray = [];
 
       if (productsString !== null) {
-        const productsId = JSON.parse(productsString).map((e) => (e.id));
+        const productsId = JSON.parse(productsString).map((e) => e.id);
         const products = JSON.parse(productsString);
 
         if (Array.isArray(productsId)) {
-        //   for (const productId of productsId) {
-        //     try {
-        //       const response = await fetch(api + `/product/${productId}`, {
-        //         headers: {
-        //           Authorization: `Bearer ${localStorage.getItem('token')}`,
-        //         },
-        //       });
+          //   for (const productId of productsId) {
+          //     try {
+          //       const response = await fetch(api + `/product/${productId}`, {
+          //         headers: {
+          //           Authorization: `Bearer ${localStorage.getItem('token')}`,
+          //         },
+          //       });
 
-        //       if (response.status !== 200) {
-        //         const data = await response.json();
-        //         alert(data.message);
-        //         continue;
-        //       }
+          //       if (response.status !== 200) {
+          //         const data = await response.json();
+          //         alert(data.message);
+          //         continue;
+          //       }
 
-        //       const data = await response.json();
-        //       if (
-        //         !productsArray.some(
-        //           (existingProduct) => existingProduct.id === data.product.id
-        //         )
-        //       ) {
-        //         productsArray.push(data.product);
-        //       }
-        //     } catch (error) {
-        //       console.error('Error fetching product data:', error);
-        //     }
-        //   }
+          //       const data = await response.json();
+          //       if (
+          //         !productsArray.some(
+          //           (existingProduct) => existingProduct.id === data.product.id
+          //         )
+          //       ) {
+          //         productsArray.push(data.product);
+          //       }
+          //     } catch (error) {
+          //       console.error('Error fetching product data:', error);
+          //     }
+          //   }
 
           return products.map((product: Array<ProductData>) => {
             return {

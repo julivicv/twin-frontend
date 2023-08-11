@@ -143,8 +143,8 @@ export default defineComponent({
     const addCartProdutct = (idProduct) => {
       isLoading.value = true;
       if (localStorage.getItem('cart') === null) {
-        let data = idProduct
-        data.quantity = 1
+        let data = idProduct;
+        data.quantity = 1;
         const dataCart = [data];
         localStorage.setItem('cart', JSON.stringify(dataCart));
       } else {

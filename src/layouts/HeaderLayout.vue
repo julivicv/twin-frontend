@@ -52,9 +52,6 @@
               <q-menu fit>
                 <q-list style="min-width: 100px">
                   <q-item clickable>
-                    <q-item-section v-on:click="perfil">Perfil</q-item-section>
-                  </q-item>
-                  <q-item clickable>
                     <q-item-section v-on:click="leave">Sair</q-item-section>
                   </q-item>
                   <q-item clickable>
@@ -145,10 +142,6 @@ export default defineComponent({
     loja() {
       this.$router.push('/shops');
     },
-    perfil() {
-      this.$router.push('/perfil');
-    },
-  
   },
 });
 </script>
