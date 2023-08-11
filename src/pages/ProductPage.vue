@@ -21,13 +21,16 @@
           label="Add to cart"
           color="primary"
           class="q-mt-md"
-          @click="() => alert('Not implemented')"
+          @click="() => addCartProdutct(page)"
         />
       </div>
     </div>
     <h2 class="tw-text-2xl tw-text-center tw-m-10">Comentarios</h2>
     <div class="tw-flex tw-w-fit tw-m-auto tw-gap-2 tw-my-25">
-      <q-form @submit="onSubmit" class="q-gutter-md login-form tw-flex tw-mb-10">
+      <q-form
+        @submit="onSubmit"
+        class="q-gutter-md login-form tw-flex tw-mb-10"
+      >
         <q-input
           class="tw-w-fit"
           :dark="true"
@@ -132,7 +135,16 @@ export default defineComponent({
 
     const commentref = ref<Comment[]>([]);
 
-    console.log(commentref);
+    const addCartProdutct = (idProduct) => {
+      if (localStorage.getItem('cart') === null) {
+        const dataCart = [idProduct];
+        localStorage.setItem('cart', JSON.stringify(dataCart));localStorage.setItem('cart', JSON.stringify(dataCart));
+      } else {
+        const dataCart = JSON.parse(localStorage.getItem(`cart`));
+        dataCart.push(idProduct)
+        localStorage.setItem('cart', JSON.stringify(dataCart));
+      }
+    };
 
     (async () => {
       await getProductData();
@@ -144,6 +156,7 @@ export default defineComponent({
       product,
       commentref,
       comment,
+      addCartProdutct,
 
       onSubmit() {
         const data = {
