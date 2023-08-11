@@ -22,7 +22,7 @@
           label="Add to cart"
           color="primary"
           class="q-mt-md"
-          @click="() => addCartProdutct(page)"
+          @click="() => addCartProdutct(product)"
         />
 
         <q-btn v-else class="q-mt-md" color="primary">
@@ -143,10 +143,10 @@ export default defineComponent({
     const addCartProdutct = (idProduct) => {
       isLoading.value = true;
       if (localStorage.getItem('cart') === null) {
-        const dataCart = [idProduct];
+        let data = idProduct
+        data.quantity = 1
+        const dataCart = [data];
         localStorage.setItem('cart', JSON.stringify(dataCart));
-        localStorage.setItem('cart', JSON.stringify(dataCart));
-        isLoading.value = false;
       } else {
         const dataCart = JSON.parse(localStorage.getItem(`cart`));
         dataCart.push(idProduct);
