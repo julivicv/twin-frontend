@@ -1,12 +1,48 @@
 <template>
   <div class="q-pa-md">
-    <h1 class="tw-text-2xl tw-text-white tw-m-3 tw-text-center">Cadastre sua Loja</h1>
-    <q-form class="tw-grid tw-grid-cols-2 tw-w-[50%] tw-m-auto tw-gap-5 tw-my-10" :dark="true" @submit="onSubmit"
-      color="primary" animated>
-      <q-input rounded :dark="true" v-model="title" label="Titulo" class="tw-col-span-1" />
-      <q-input rounded :dark="true" v-model="description" label="Breve descrição" class="tw-col-span-1" />
-      <q-input rounded :dark="true" v-model="content" type="textarea" class="tw-col-span-2" label="Conteudo da pagina" />
-      <q-btn color="primary" class="tw-col-span-2" label="Create" type="submit" />
+    <h1 class="tw-text-2xl tw-text-white tw-m-3 tw-text-center">
+      Cadastre sua Loja
+    </h1>
+    <q-form
+      class="tw-grid tw-grid-cols-2 tw-w-[50%] tw-m-auto tw-gap-5 tw-my-10"
+      :dark="true"
+      @submit="onSubmit"
+      color="primary"
+      animated
+    >
+      <q-input
+        rounded
+        :dark="true"
+        v-model="title"
+        label="Titulo"
+        class="tw-col-span-1"
+      />
+      <q-input
+        rounded
+        :dark="true"
+        v-model="description"
+        label="Breve descrição"
+        class="tw-col-span-1"
+      />
+      <q-input
+        rounded
+        :dark="true"
+        v-model="content"
+        type="textarea"
+        class="tw-col-span-2"
+        label="Conteudo da pagina"
+      />
+      <q-btn
+        v-if="!isLoading"
+        rounded
+        color="primary"
+        label="Create"
+        type="submit"
+        class="tw-col-span-2"
+      />
+      <q-btn v-else class="tw-col-span-2" rounded color="primary">
+        <q-spinner />
+      </q-btn>
     </q-form>
   </div>
 </template>
@@ -20,12 +56,14 @@ export default {
     const title = ref(null);
     const description = ref(null);
     const content = ref(null);
+    const isLoading = ref(false);
     const $q = useQuasar();
 
     return {
       title,
       description,
       content,
+      isLoading,
 
       onSubmit() {
         const data = {
@@ -34,12 +72,14 @@ export default {
           content: content.value,
         };
 
+        isLoading.value = true;
+
         function createStore(body) {
           const options = {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
             body: JSON.stringify(body),
           };
@@ -53,7 +93,7 @@ export default {
               color: 'green-4',
               textColor: 'white',
               icon: 'error',
-              message: "Create store success",
+              message: 'Create store success',
               position: 'top-right',
             });
 
@@ -66,6 +106,8 @@ export default {
               icon: 'error',
               message: error.message,
               position: 'top-right',
+            }).finally(() => {
+              isLoading.value = false;
             });
           });
       },
