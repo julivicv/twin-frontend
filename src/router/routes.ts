@@ -37,14 +37,6 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
-    path: '/perfil',
-    component: () => import('layouts/HeaderLayout.vue'),
-    children: [
-      { path: '', component: () => import('src/pages/PerfilPage.vue') },
-    ],
-  },
-
-  {
     path: '/contato',
     component: () => import('layouts/HeaderLayout.vue'),
     children: [
