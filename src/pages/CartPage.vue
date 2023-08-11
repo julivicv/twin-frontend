@@ -48,6 +48,7 @@
                 v-model="quantity"
                 label="Quantidade"
                 class="tw-col-span-2"
+                @change="(e: any) => changeQtd(p.id, e)"
               />
             </div>
           </q-card-section>
@@ -61,18 +62,27 @@
 
 <script lang="ts">
 import { ref, onMounted } from 'vue';
-import { useQuasar } from 'quasar';
+// import { useQuasar } from 'quasar';
 
 interface ProductData {
   id: number;
   name: string;
   price: string;
   image: string;
+  quantity: number;
 }
 
-const api = process.env.API;
+//const api = process.env.API;
 
 export default {
+  methods: {
+    changeQtd (id: number, event: any) {
+      const data = JSON.stringify(productsData.value.map((e) => (e.id == id ? {...e , quantity: event.target.value} : e)))
+      console.log(data);
+      
+      localStorage.setItem('cart', data)
+    }
+  },
   setup() {
     const productsData = ref<ProductData[]>([]);
     const quantity = ref(null);
@@ -97,52 +107,57 @@ export default {
     ];
 
     const deleteFromCart = (id) => {
-      //adicionar lógica
-      console.log("aa");
+      const data = productsData.value.filter((e) => (e.id != id))
+      console.log(id);
       
+      
+      localStorage.setItem('cart', JSON.stringify(data))
+      getCartProducts()
     };
 
     const getCartProducts = async () => {
       const productsString = localStorage.getItem('cart');
-      const productsArray = [];
+      //const productsArray = [];
 
       if (productsString !== null) {
+        const productsId = JSON.parse(productsString).map((e) => (e.id));
         const products = JSON.parse(productsString);
 
-        if (Array.isArray(products)) {
-          for (const productId of products) {
-            try {
-              const response = await fetch(api + `/product/${productId}`, {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-              });
+        if (Array.isArray(productsId)) {
+        //   for (const productId of productsId) {
+        //     try {
+        //       const response = await fetch(api + `/product/${productId}`, {
+        //         headers: {
+        //           Authorization: `Bearer ${localStorage.getItem('token')}`,
+        //         },
+        //       });
 
-              if (response.status !== 200) {
-                const data = await response.json();
-                alert(data.message);
-                continue;
-              }
+        //       if (response.status !== 200) {
+        //         const data = await response.json();
+        //         alert(data.message);
+        //         continue;
+        //       }
 
-              const data = await response.json();
-              if (
-                !productsArray.some(
-                  (existingProduct) => existingProduct.id === data.product.id
-                )
-              ) {
-                productsArray.push(data.product);
-              }
-            } catch (error) {
-              console.error('Error fetching product data:', error);
-            }
-          }
+        //       const data = await response.json();
+        //       if (
+        //         !productsArray.some(
+        //           (existingProduct) => existingProduct.id === data.product.id
+        //         )
+        //       ) {
+        //         productsArray.push(data.product);
+        //       }
+        //     } catch (error) {
+        //       console.error('Error fetching product data:', error);
+        //     }
+        //   }
 
-          return productsArray.map((product: any) => {
+          return products.map((product: Array<ProductData>) => {
             return {
               id: product.id,
               name: product.name,
               price: product.price,
               image: product.url,
+              quantity: product.quantity,
             };
           });
         } else {
