@@ -44,11 +44,21 @@
           label="Deixe seu comentario"
         />
         <q-btn
+          v-if="!isLoadingComment"
           color="red"
           text-color="#121212"
           type="submit"
           label="Adicionar"
         />
+        <q-btn
+          v-else="!isLoadingComment"
+          color="red"
+          text-color="#121212"
+          type="button"
+          disable
+        >
+          <q-spinner />
+        </q-btn>
       </q-form>
     </div>
     <div class="tw-grid tw-grid-cols-4 tw-gap-4 tw-p-4">
@@ -83,6 +93,7 @@ export default defineComponent({
 
     const $q = useQuasar();
     const isLoading = ref(false);
+    const isLoadingComment = ref(false);
 
     const getProductData = async () => {
       try {
@@ -167,9 +178,10 @@ export default defineComponent({
       comment,
       addCartProdutct,
       isLoading,
+      isLoadingComment,
 
       onSubmit() {
-        isLoading.value = true;
+        isLoadingComment.value = true;
         const data = {
           content: comment.value,
         };
@@ -212,7 +224,7 @@ export default defineComponent({
             });
           })
           .finally(() => {
-            isLoading.value = false;
+            isLoadingComment.value = false;
           });
       },
     };
