@@ -17,7 +17,6 @@
             class="q-ml-lg q-mr-lg search"
           >
             <template v-slot:append>
-<<<<<<< HEAD
               <q-icon v-if="text === ''" name="search" />
               <q-icon
                 v-else
@@ -25,13 +24,6 @@
                 class="cursor-pointer"
                 @click="text = ''"
               />
-=======
-              <q-form @submit="onSubmit">
-                <q-icon v-if="text === ''" name="search" />
-                <q-btn name="clear" class="cursor-pointer" @click="text = ''">
-                </q-btn>
-              </q-form>
->>>>>>> 24ab5bed2c08e39200b03c004de9996c6d894753
             </template>
           </q-input>
 
