@@ -5,6 +5,7 @@
         class="header tw-flex tw-justify-between tw-bg-[#D95D39] mx-0 lg:mx-auto tw-p-5 tw-font-bold h-[10vh]"
       >
         <div class="">
+<<<<<<< HEAD
           <h1
             class="tw-leading-[4rem] tw-text-8xl tw-sm:text-6xl tw-md:text-5xl tw-lg:text-2xl tw-xl:text-7xl tw-ml-2 tw-mr-6 tw-mt-10"
             id="CRewufpi"
@@ -14,6 +15,10 @@
           <button class="tw-m-5 tw-text-2xl tw-bg-[#202C59] tw-p-3 tw-ml-1 tw-mt-9">
             Crie um e-comerce
           </button>
+=======
+          <h1 class="tw-leading-[4rem] tw-text-6xl tw-mb-5 tw-sm:text-4xl tw-md:text-5xl tw-lg:text-6xl tw-xl:text-7xl " id="CRewufpi">SEU IMPÉRIO VIRTUAL COMEÇA AGORA</h1>
+          <router-link to="/createShop" class="tw-mt-10 tw-text-2xl tw-bg-[#202C59] tw-p-2 tw-ml-1">Crie um E-commerce</router-link>
+>>>>>>> 24ab5bed2c08e39200b03c004de9996c6d894753
         </div>
         <div class="tw-max-w-[20%] tw-ml-6">
           <img

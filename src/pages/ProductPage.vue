@@ -18,11 +18,16 @@
         <p>Quantidade em stoque: {{ product.quantity }}</p>
 
         <q-btn
+          v-if="!isLoading"
           label="Add to cart"
           color="primary"
           class="q-mt-md"
           @click="() => addCartProdutct(page)"
         />
+
+        <q-btn v-else class="q-mt-md" color="primary">
+          <q-spinner />
+        </q-btn>
       </div>
     </div>
     <h2 class="tw-text-2xl tw-text-center tw-m-10">Comentarios</h2>
@@ -136,14 +141,17 @@ export default defineComponent({
     const commentref = ref<Comment[]>([]);
 
     const addCartProdutct = (idProduct) => {
+      isLoading.value = true;
       if (localStorage.getItem('cart') === null) {
         const dataCart = [idProduct];
         localStorage.setItem('cart', JSON.stringify(dataCart));
         localStorage.setItem('cart', JSON.stringify(dataCart));
+        isLoading.value = false;
       } else {
         const dataCart = JSON.parse(localStorage.getItem(`cart`));
         dataCart.push(idProduct);
         localStorage.setItem('cart', JSON.stringify(dataCart));
+        isLoading.value = false;
       }
     };
 
@@ -158,8 +166,10 @@ export default defineComponent({
       commentref,
       comment,
       addCartProdutct,
+      isLoading,
 
       onSubmit() {
+        isLoading.value = true;
         const data = {
           content: comment.value,
         };

@@ -17,6 +17,7 @@
             class="q-ml-lg q-mr-lg search"
           >
             <template v-slot:append>
+<<<<<<< HEAD
               <q-icon v-if="text === ''" name="search" />
               <q-icon
                 v-else
@@ -24,6 +25,13 @@
                 class="cursor-pointer"
                 @click="text = ''"
               />
+=======
+              <q-form @submit="onSubmit">
+                <q-icon v-if="text === ''" name="search" />
+                <q-btn name="clear" class="cursor-pointer" @click="text = ''">
+                </q-btn>
+              </q-form>
+>>>>>>> 24ab5bed2c08e39200b03c004de9996c6d894753
             </template>
           </q-input>
 
@@ -39,14 +47,18 @@
           <router-link
             v-if="!isAuthenticated"
             to="/cadastro"
+<<<<<<< HEAD
             class="hover:tw-underline"
+=======
+            class="hover:tw-underline tw-ml-10"
+>>>>>>> 24ab5bed2c08e39200b03c004de9996c6d894753
             >Cadastro</router-link
           >
           <div class="tw-flex tw-items-center tw-gap-5">
             <div v-if="isAuthenticated" class="text-weight-bold">
               Olá, {{ user.name }}
             </div>
-            <div v-else class="text-weight-bold">Olá, logue-se</div>
+            <div v-else class="text-weight-bold tw-ml-10">Bem-Vindo(a)</div>
             <q-avatar v-if="isAuthenticated" class="q-mr-sm">
               <img :src="user.img" />
               <q-menu fit>
@@ -85,7 +97,11 @@
             >
           </nav>
           <router-link class="menu-text" to="/createShop"
+<<<<<<< HEAD
             >CRIE SEU E-COMERCE</router-link
+=======
+            >CRIE SEU E-COMMERCE</router-link
+>>>>>>> 24ab5bed2c08e39200b03c004de9996c6d894753
           >
         </div>
       </q-header>
@@ -112,9 +128,10 @@ export default defineComponent({
       img: 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png',
     };
     const isAuthenticated = ref(localStorage.getItem('token') !== null);
+    const text = ref('');
 
     return {
-      text: ref(''),
+      text,
       user,
       isAuthenticated,
       login() {
@@ -123,6 +140,13 @@ export default defineComponent({
             //@ts-ignore
             this.$router.push('/login')
           : (isAuthenticated.value = true);
+      },
+
+      onSubmit() {
+        const data = {
+          text: text.value,
+        };
+        console.log(data);
       },
     };
   },
@@ -162,5 +186,9 @@ export default defineComponent({
 .menu-text {
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 12pt;
+}
+
+img {
+  cursor: pointer;
 }
 </style>
