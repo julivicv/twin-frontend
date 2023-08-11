@@ -107,17 +107,12 @@ export default {
     ];
 
     const deleteFromCart = (id) => {
-<<<<<<< HEAD
-      //adicionar lógica
-      console.log('aa');
-=======
       const data = productsData.value.filter((e) => (e.id != id))
       console.log(id);
       
       
       localStorage.setItem('cart', JSON.stringify(data))
       getCartProducts()
->>>>>>> 721e9d9c69a1413c13c2c2d90059b4e9f99b1699
     };
 
     const getCartProducts = async () => {
