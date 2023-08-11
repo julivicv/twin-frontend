@@ -8,23 +8,43 @@
           </a>
           <q-space />
 
-          <q-input dark dense standout v-model="text" input-class="text-left" class="q-ml-lg q-mr-lg search">
+          <q-input
+            dark
+            dense
+            standout
+            v-model="text"
+            input-class="text-left"
+            class="q-ml-lg q-mr-lg search"
+          >
             <template v-slot:append>
-              <q-icon v-if="text === ''" name="search" />
-              <q-icon v-else name="clear" class="cursor-pointer" @click="text = ''" />
+              <q-form @submit="onSubmit">
+                <q-icon v-if="text === ''" name="search" />
+                <q-btn name="clear" class="cursor-pointer" @click="text = ''">
+                </q-btn>
+              </q-form>
             </template>
           </q-input>
 
           <q-space />
 
-          <router-link v-if="!isAuthenticated" to="/login" class="hover:tw-underline">Login</router-link>
+          <router-link
+            v-if="!isAuthenticated"
+            to="/login"
+            class="hover:tw-underline"
+            >Login</router-link
+          >
 
-          <router-link v-if="!isAuthenticated" to="/cadastro" class="hover:tw-underline">Cadastro</router-link>
+          <router-link
+            v-if="!isAuthenticated"
+            to="/cadastro"
+            class="hover:tw-underline tw-ml-10"
+            >Cadastro</router-link
+          >
           <div class="tw-flex tw-items-center tw-gap-5">
             <div v-if="isAuthenticated" class="text-weight-bold">
               Olá, {{ user.name }}
             </div>
-            <div v-else class="text-weight-bold">Olá, logue-se</div>
+            <div v-else class="text-weight-bold tw-ml-10">Bem-Vindo(a)</div>
             <q-avatar v-if="isAuthenticated" class="q-mr-sm">
               <img :src="user.img" />
               <q-menu fit>
@@ -36,7 +56,9 @@
                     <q-item-section v-on:click="leave">Sair</q-item-section>
                   </q-item>
                   <q-item clickable>
-                    <q-item-section v-on:click="loja">Suas Lojas</q-item-section>
+                    <q-item-section v-on:click="loja"
+                      >Suas Lojas</q-item-section
+                    >
                   </q-item>
                 </q-list>
               </q-menu>
@@ -48,13 +70,21 @@
           </div>
         </q-toolbar>
 
-        <div class="tw-flex tw-p-2 tw-bg-slate-50 tw-justify-between tw-text-[#121212]">
+        <div
+          class="tw-flex tw-p-2 tw-bg-slate-50 tw-justify-between tw-text-[#121212]"
+        >
           <nav class="tw-flex tw-gap-4">
             <router-link class="menu-text" to="/">PÁGINA INICIAL</router-link>
-            <router-link class="menu-text" to="/createShop">CRIAR LOJAS</router-link>
-            <router-link class="menu-text" to="/createProduct">CRIAR PRODUTOS</router-link>
+            <router-link class="menu-text" to="/createShop"
+              >CRIAR LOJAS</router-link
+            >
+            <router-link class="menu-text" to="/createProduct"
+              >CRIAR PRODUTOS</router-link
+            >
           </nav>
-          <router-link class="menu-text" to="/createShop">CRIE SEU E-COMERCE</router-link>
+          <router-link class="menu-text" to="/createShop"
+            >CRIE SEU E-COMMERCE</router-link
+          >
         </div>
       </q-header>
 
@@ -80,17 +110,25 @@ export default defineComponent({
       img: 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png',
     };
     const isAuthenticated = ref(localStorage.getItem('token') !== null);
+    const text = ref('');
 
     return {
-      text: ref(''),
+      text,
       user,
       isAuthenticated,
       login() {
         isAuthenticated.value
           ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          //@ts-ignore
-          this.$router.push('/login')
+            //@ts-ignore
+            this.$router.push('/login')
           : (isAuthenticated.value = true);
+      },
+
+      onSubmit() {
+        const data = {
+          text: text.value,
+        };
+        console.log(data);
       },
     };
   },
@@ -125,5 +163,9 @@ export default defineComponent({
 .menu-text {
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 12pt;
+}
+
+img {
+  cursor: pointer;
 }
 </style>
