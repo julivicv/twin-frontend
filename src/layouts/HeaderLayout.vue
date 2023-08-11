@@ -39,11 +39,7 @@
           <router-link
             v-if="!isAuthenticated"
             to="/cadastro"
-<<<<<<< HEAD
-            class="hover:tw-underline"
-=======
             class="hover:tw-underline tw-ml-10"
->>>>>>> 24ab5bed2c08e39200b03c004de9996c6d894753
             >Cadastro</router-link
           >
           <div class="tw-flex tw-items-center tw-gap-5">
